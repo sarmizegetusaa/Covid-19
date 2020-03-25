@@ -1,7 +1,8 @@
 const initState = {
   hasErrors: false,
   locations: [],
-  allLocations: []
+  allLocations: [],
+  cases: 'confirmed'
 }
 
 const dataReducer = (state = initState, action )=>{
@@ -13,6 +14,11 @@ const dataReducer = (state = initState, action )=>{
   if(action.type === 'ADD_ALLLOCATIONS'){
     let newState = { ...state };
     newState.allLocations = action.allLocations;
+    return newState;
+  }
+  if(action.type === 'CHNAGE_CASES'){
+    let newState = { ...state };
+    newState.cases = action.cases;
     return newState;
   }
   return state;

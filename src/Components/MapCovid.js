@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import L from 'leaflet';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
-import Dashboard from './Dashboard';
 import { connect } from 'react-redux';
 
 class MapCovid extends Component{
@@ -40,7 +39,7 @@ class MapCovid extends Component{
             state.deaths += element.deaths;
             state.active += element.active;
           }
-        })
+        });
      
         // values for map
         let mapLocations = computedStates.concat(uniqueNames);
@@ -85,21 +84,18 @@ class MapCovid extends Component{
         this.props.addAllLocations(all)
       })
       .catch(err => console.log(err));
+
+    fetch("https://covid19.mathdro.id/api")
+    .then(res=> res.json())
+    .then(res => {
+      console.log(res.confirmed.value)
+    })
+    .catch(err => console.log(err))
   }
 
   render() {
     return (
       <div>
-        <div id="container-header">
-          <div id="header">
-            <div className="page-btns">
-              <button id="recent-cases-btn">Recent Cases</button>
-              <button id="timeline-btn">Timeline</button>
-            </div>
-            <div className="title">Coronavirus COVID-19 Global Cases</div>
-          </div>
-        </div>
-        <div className='container'>
           <Map className='map' center={[0, 0]} zoom={3}>
             <TileLayer
               url='https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png'
@@ -135,8 +131,6 @@ class MapCovid extends Component{
                 </Marker>
                 }) }
             </Map>
-            <Dashboard />
-          </div>
         </div>)
   }
 }
