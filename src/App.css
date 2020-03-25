@@ -1,38 +1,59 @@
 .App {
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.map{
+  height: 100vh;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* popup */
+.leaflet-popup-content-wrapper, .leaflet-popup-tip {
+  background: #383737;
+  color: #302f2f;
+  width: 200px;
+  border-radius: 0;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.popup {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #333;
+  color: beige;
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  line-height: 1.4rem;
+}
+.popup-location{
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  font-size: 1.2rem;
+  margin-bottom: 0.6rem;
 }
-
-.App-link {
-  color: #61dafb;
+.popup-country {
+  margin-right: 0.5rem;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.confirmed {
+  color: rgb(204, 183, 183);
+  font-weight: 800;
+}
+.deaths {
+  color: #ff0000;
+  font-weight: 800;
+}
+.recovered {
+  color: rgb(0, 112, 0);
+  font-weight: 800;
+}
+.active {
+  color: rgb(187, 187, 70);
+  /* color: rgb(186, 199, 133); */
+  font-weight: 800;
+}
+.marker {
+  box-sizing: border-box;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 50%;
+  border: 1px solid #fff;
+}
+.marker_booking {
+  background: yellowgreen;
+}
+.marker_supplier {
+  background: #ff5722;
 }
