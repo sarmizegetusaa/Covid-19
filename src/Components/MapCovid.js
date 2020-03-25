@@ -1,17 +1,10 @@
 import React, { Component } from 'react';
 import L from 'leaflet';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
+import Dashboard from './Dashboard';
 import { connect } from 'react-redux';
-import $ from 'jquery';
-import { Icon } from "leaflet";
 
 class MapCovid extends Component{
-
-  state = {
-    hasErrors: false,
-    locations: [],
-    allLocations: []
-  };
 
   componentDidMount() {
     // fetch("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv")
@@ -25,8 +18,6 @@ class MapCovid extends Component{
     fetch("https://covid19.mathdro.id/api/confirmed")
       .then(res => res.json())
       .then(res => {
-        // data
-        // console.log(res)
         let uniqueNames = res.filter(re => {
           return re.provinceState == null;
         })
@@ -97,31 +88,56 @@ class MapCovid extends Component{
   }
 
   render() {
-    return  (<div>
-            <Map className='map' center={[0, 0]} zoom={3}>
-              <TileLayer
-                url='https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png'
-                attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
-                />
-                {this.props.locations.map((location, index)=>{
-                  console.log(location)
-                  return <Marker
-                    key={index}
-                    position={[
-                      location.lat,
-                      location.long
-                    ]}
-                    icon={L.divIcon({
-                      html: "",
-                      className: `marker marker_supplier`,
-                      iconSize: L.point(15, 15, true)
-                    })}
-                    >
-                  </Marker>
-                  }) }
-              </Map>
-            </div>)
-    
+    return (
+      <div>
+        <div id="container-header">
+          <div id="header">
+            <div className="page-btns">
+              <button id="recent-cases-btn">Recent Cases</button>
+              <button id="timeline-btn">Timeline</button>
+            </div>
+            <div className="title">Coronavirus COVID-19 Global Cases</div>
+          </div>
+        </div>
+        <div className='container'>
+          <Map className='map' center={[0, 0]} zoom={3}>
+            <TileLayer
+              url='https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png'
+              attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+              />
+              {this.props.locations.map((location, index)=>{
+                let radius = parseFloat(location.confirmed/700);
+                if(radius < 2){
+                  radius = 6
+                }
+                return <Marker
+                  key={index}
+                  position={[
+                    location.lat,
+                    location.long
+                  ]}
+                  icon={L.divIcon({
+                    html: "",
+                    className: `marker marker_supplier`,
+                    iconSize: L.point(radius, radius, true)
+                  })}
+                  >
+                  <Popup>
+                    <div className='popup'>
+                      {(location.provinceState !== null )? location.provinceState : null} {location.countryRegion}
+                      <br/>
+                      <div>Confirmed: <span className='confirmed'>{location.confirmed}</span></div>
+                      <div>Deaths: <span className='deaths'>{location.deaths}</span></div>
+                      <div>Recovered: <span className='recovered'>{location.recovered}</span></div>
+                      <div>Active: <span className='active'>{location.active}</span></div>
+                    </div>
+                  </Popup>
+                </Marker>
+                }) }
+            </Map>
+            <Dashboard />
+          </div>
+        </div>)
   }
 }
 
