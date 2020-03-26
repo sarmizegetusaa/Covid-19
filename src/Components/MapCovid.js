@@ -41,12 +41,11 @@ class MapCovid extends Component{
           }
         });
      
-        // values for map
+        // values for map display
         let mapLocations = computedStates.concat(uniqueNames);
-
+        // add mapLocations to state
         this.props.addLocations(mapLocations)
 
-        //
         let countries = [];
         computedStates.forEach((element)=>{
           let state = countries.find((country)=>{
@@ -81,14 +80,22 @@ class MapCovid extends Component{
             state.active += element.active;
           }
         })
-        this.props.addAllLocations(all)
+        // add allLocations values to state
+        this.props.addAllLocations(all);
       })
       .catch(err => console.log(err));
 
     fetch("https://covid19.mathdro.id/api")
     .then(res=> res.json())
     .then(res => {
-      console.log(res.confirmed.value)
+      let globalValues = {
+        confirmed: res.confirmed.value,
+        recovered: res.recovered.value,
+        deaths: res.deaths.value,
+        active: res.confirmed.value - (res.recovered.value + res.deaths.value)
+      }
+      // add global values to state
+      this.props.addGlobalValues(globalValues);
     })
     .catch(err => console.log(err))
   }
@@ -96,56 +103,74 @@ class MapCovid extends Component{
   render() {
     return (
       <div>
-          <Map className='map' center={[0, 0]} zoom={3}>
-            <TileLayer
-              url='https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png'
-              attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
-              />
-              {this.props.locations.map((location, index)=>{
-                let radius = parseFloat(location.confirmed/700);
-                if(radius < 2){
-                  radius = 6
-                }
-                return <Marker
-                  key={index}
-                  position={[
-                    location.lat,
-                    location.long
-                  ]}
-                  icon={L.divIcon({
-                    html: "",
-                    className: `marker marker_supplier`,
-                    iconSize: L.point(radius, radius, true)
-                  })}
-                  >
-                  <Popup>
-                    <div className='popup'>
-                      {(location.provinceState !== null )? location.provinceState : null} {location.countryRegion}
-                      <br/>
-                      <div>Confirmed: <span className='confirmed'>{location.confirmed}</span></div>
-                      <div>Deaths: <span className='deaths'>{location.deaths}</span></div>
-                      <div>Recovered: <span className='recovered'>{location.recovered}</span></div>
-                      <div>Active: <span className='active'>{location.active}</span></div>
-                    </div>
-                  </Popup>
-                </Marker>
-                }) }
-            </Map>
-        </div>)
+        <Map className='map' center={[0, 0]} zoom={3}>
+          <TileLayer
+            url='https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png'
+            attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+            />
+          {this.props.locations.map((location, index)=>{
+            // calc radius depending on cases
+            let radiusC = this.props.cases
+            let radius = parseFloat(location[radiusC]/500);
+            if(radius < 2){
+              radius = 7
+            }
+            if(radiusC === 'deaths'){
+              radius = parseFloat(location[radiusC]/120);
+              if(radius < 2){
+                radius = 7
+              }
+            }
+            if(radiusC === 'recovered'){
+              radius = parseFloat(location[radiusC]/600);
+              if(radius < 7){
+                radius = 7
+              }
+            }
+            return (
+              <Marker
+                key={index}
+                position={[
+                  location.lat,
+                  location.long
+                ]}
+                icon={L.divIcon({
+                  html: "",
+                  className: `marker background-${this.props.cases}`,
+                  iconSize: L.point(radius, radius, true)
+                })}
+                >
+                <Popup>
+                  <div className='popup'>
+                    {(location.provinceState !== null )? location.provinceState : null} {location.countryRegion}
+                    <br/>
+                    <div>Confirmed: <span className='confirmed'>{location.confirmed}</span></div>
+                    <div>Deaths: <span className='deaths'>{location.deaths}</span></div>
+                    <div>Recovered: <span className='recovered'>{location.recovered}</span></div>
+                    <div>Active: <span className='active'>{location.active}</span></div>
+                  </div>
+                </Popup>
+              </Marker>
+              )
+            }) }
+          </Map>
+      </div>)
   }
 }
 
 const mapStateToProps = (state) => {
   return {
     locations: state.locations,
-    allLocations: state.allLocations
+    allLocations: state.allLocations,
+    cases: state.cases
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     addLocations: (locations) => { dispatch({type: 'ADD_LOCATIONS', locations: locations})},
-    addAllLocations: (allLocations) => { dispatch({type: 'ADD_ALLLOCATIONS', allLocations: allLocations})}
+    addAllLocations: (allLocations) => { dispatch({type: 'ADD_ALLLOCATIONS', allLocations: allLocations})},
+    addGlobalValues: (globalValues) => { dispatch({type: 'ADD_GLOBALVALUES', globalValues: globalValues})}
   }
 }
 

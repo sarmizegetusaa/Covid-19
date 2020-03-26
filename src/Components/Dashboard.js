@@ -3,20 +3,20 @@ import { connect } from 'react-redux';
 
 class Dashboard extends Component {
   handleChangeConfirm = () =>{
-    const cases = 'confirmed'
-    this.props.onChangeButton(cases)
+    const cases = 'confirmed';
+    this.props.onChangeButton(cases);
   }
   handleChangeActive = () =>{
-    const cases = 'active'
-    this.props.onChangeButton(cases)
+    const cases = 'active';
+    this.props.onChangeButton(cases);
   }
   handleChangeRecovered = () =>{
-    const cases = 'recovered'
-    this.props.onChangeButton(cases)
+    const cases = 'recovered';
+    this.props.onChangeButton(cases);
   }
   handleChangeDeaths = () =>{
-    const cases = 'deaths'
-    this.props.onChangeButton(cases)
+    const cases = 'deaths';
+    this.props.onChangeButton(cases);
   }
   render() {
     const casesC = this.props.cases;
@@ -27,7 +27,7 @@ class Dashboard extends Component {
       <div className='dashboard'>
         <div id="header-statistics">
         <div id="type-cases">{casesC.charAt(0).toUpperCase() + casesC.slice(1)}</div>
-          <div id="number-cases"></div>
+          <div id="number-cases" className={casesC}>{this.props.globalValues[casesC]}</div>
         </div>
       
         <ul>
@@ -50,7 +50,8 @@ const mapStateToProps = (state) => {
   return {
     locations: state.locations,
     allLocations: state.allLocations,
-    cases: state.cases
+    cases: state.cases,
+    globalValues: state.globalValues
   }
 }
 

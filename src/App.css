@@ -68,13 +68,21 @@ body {
   color: #ff0000;
   font-weight: 800;
 }
+.background-deaths{
+  background-color: rgba(255, 0, 0, 0.3);
+}
+.background-recovered{
+  background-color: rgba(0, 112, 0, 0.3);
+}
+.background-active{
+  background-color: rgba(187, 187, 70, 0.3);
+}
 .recovered {
   color: rgb(0, 112, 0);
   font-weight: 800;
 }
 .active {
   color: rgb(187, 187, 70);
-  /* color: rgb(186, 199, 133); */
   font-weight: 800;
 }
 .marker {
@@ -87,7 +95,7 @@ body {
 .marker_booking {
   background: yellowgreen;
 }
-.marker_supplier {
+.background-confirmed {
   background: rgba(255, 87, 34, 0.6);
 }
 
@@ -110,7 +118,7 @@ body {
 #number-cases{
   text-align: center;
   font-size: 2.7rem;
-  color: #fff;
+  /* color: #fff; */
   font-weight: 600;
   margin-top: 0.5rem;
 }
