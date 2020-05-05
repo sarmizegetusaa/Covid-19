@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import * as d3 from 'd3';
 import { connect } from 'react-redux';
 
 class Dashboard extends Component {
@@ -23,23 +22,33 @@ class Dashboard extends Component {
     this.props.onChangeButton(cases);
     this.props.addNowCase(3);
   }
-  totalDashboad = (casesC) => {
-    const dashCases = this.props.dashboardTimeline[casesC];
-    if (dashCases) {
-      return dashCases.reduce((accumulator, currentVal) => {
-        return accumulator + +currentVal[this.props.nowCase];
-      }, 0);
-    }
-    return 0;
-  }
   
   render() {
+    // return(<div>bla</div>)
     let casesC = this.props.cases;
     const confirmedLocations = this.props.allLocations.sort(function(a, b){
       return b[casesC] - a[casesC];
     });
+    const length = this.props.timelineLength;
+    // const timelineCases = this.props.dashboardTimeline[`${casesC}`].sort(function(a, b){
+    //   return b[length-1] - a[length-1];
+    // });
+    // const timelineCases = this.props.dashboardTimeline[`${casesC}`];
+    let timelineCases = []
+    setTimeout(()=>{
+      timelineCases = this.props.dashboardTimeline[`${casesC}`].sort(function(a, b){
+      return b[length-1] - a[length-1];
+    });
 
-    let totalTimelineCases = this.totalDashboad(casesC);
+    // console.log(timelineCases)
+    timelineCases.forEach(location =>{
+        // total += parseInt(location[this.props.nowCase])
+        console.log(location[1])
+    })
+    }, 500)
+    // console.log(casesC)
+
+    let total = 0;
 
       return (
       <div className='dashboard'>
@@ -47,19 +56,21 @@ class Dashboard extends Component {
         <div id="type-cases">{casesC.charAt(0).toUpperCase() + casesC.slice(1)}</div>
           <div id="number-cases" className={casesC}>
             { this.props.activeCumulative ? 
-              d3.format(',')(this.props.globalValues[casesC]) :
-              d3.format(',')(totalTimelineCases)
-            }
+            (this.props.globalValues[casesC]) :
+             (setTimeout(()=>{
+              return (total)
+             },500))}
+            
           </div>
         </div>
       
         <ul>
           { this.props.activeCumulative ? (
             confirmedLocations.map((location, idx)=>{
-            return (<li key={idx}><span className={casesC}>{d3.format(',')(location[casesC])}</span> {location.countryRegion}</li>)
+            return (<li key={idx}><span className={casesC}>{location[casesC]}</span> {location.countryRegion}</li>)
           })) : (
             this.props.dashboardTimeline[`${casesC}`].map((location, idx)=>{
-            return (<li key={idx}><span className={casesC}>{ d3.format(',')(location[this.props.nowCase])}</span> {location[1]}</li>)
+            return (<li key={idx}><span className={casesC}>{location[1]}</span> {location[this.props.nowCase]}</li>)
             })
           )}
         </ul>

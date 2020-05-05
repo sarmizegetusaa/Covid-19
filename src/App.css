@@ -13,6 +13,14 @@ body {
   height: 93vh;
   border: #717171 1px solid;
 }
+.true{
+  /* opacity: 1; */
+  display: block;
+}
+.false{
+  display: none;
+  /* opacity: 0; */
+}
 #container-header{
   display: grid;
   grid-template-columns: 4fr 1fr;
@@ -44,7 +52,7 @@ body {
   width: 230px;
   border-radius: 0;
 }
-.popup {
+#popup {
   font-family: Arial, Helvetica, sans-serif;
   background-color: #333;
   color: beige;
@@ -90,7 +98,7 @@ body {
   color: #fff;
   font-weight: bold;
   border-radius: 50%;
-  border: 1px solid #fff;
+  /* border: 1px solid #fff; */
 }
 .marker_booking {
   background: yellowgreen;
@@ -98,7 +106,13 @@ body {
 .background-confirmed {
   background: rgba(255, 87, 34, 0.6);
 }
-
+#timestamp{
+  color: #fff;
+  z-index: 999;
+  font-size: 1.5rem;
+  position: relative;
+  float: right;
+}
 /* dashboard */
 .dashboard{
   position: relative;
