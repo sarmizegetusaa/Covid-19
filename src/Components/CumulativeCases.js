@@ -31,10 +31,10 @@ class CumulativeCases extends Component {
                   <div id='popup' className={this.props.activeCumulative}>
                     {(location.provinceState !== null )? location.provinceState : null} {location.countryRegion}
                     <br/>
-                    <div>Confirmed: <span className='confirmed'>{location.confirmed}</span></div>
-                    <div>Deaths: <span className='deaths'>{location.deaths}</span></div>
-                    <div>Recovered: <span className='recovered'>{location.recovered}</span></div>
-                    <div>Active: <span className='active'>{location.active}</span></div>
+                    <div>Confirmed: <span className='confirmed'>{d3.format(',')(location.confirmed)}</span></div>
+                    <div>Deaths: <span className='deaths'>{d3.format(',')(location.deaths)}</span></div>
+                    <div>Recovered: <span className='recovered'>{d3.format(',')(location.recovered)}</span></div>
+                    <div>Active: <span className='active'>{d3.format(',')(location.active)}</span></div>
                   </div>
                 </Popup>
               </Marker>

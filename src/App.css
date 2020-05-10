@@ -24,18 +24,23 @@ body {
 #container-header{
   display: grid;
   grid-template-columns: 4fr 1fr;
-  height: 3vh;
+  height: 6vh;
   color: #717171;
   font-size: 1.5rem;
   font-family: Arial, Helvetica, sans-serif;
 }
 #header {
-  grid-template-columns: 1fr 5fr;
+  grid-template-columns: 3fr 5fr;
   display: grid;
+  align-items: center;
 }
 #header .title{
   text-align: right;
   margin-right: 10px;
+}
+a {
+  text-decoration: none;
+  color: #fff;
 }
 .page-btns button {
   border: none;
@@ -175,4 +180,13 @@ ul::-webkit-scrollbar-thumb {
 li {
   border-bottom: #717171 1px solid;
   padding: 0.3rem 0 0.3rem 0.9rem;
+ }
+ /* bar chart */
+ .chart {
+   height: 900px;
+   width: 1200px;
+   margin-left: 30px;
+ }
+ .tick {
+   color: #fff;
  }

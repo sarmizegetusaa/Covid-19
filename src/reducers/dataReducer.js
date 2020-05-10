@@ -11,10 +11,16 @@ const initState = {
   numberOfCases: 0,
   nowCase: 3,
   globalValues: {},
-  timestamp:[]
+  timestamp:[],
+  keyframes: []
 }
 
 const dataReducer = (state = initState, action )=>{
+  if(action.type === 'SET_DATE'){
+    let newState = { ...state };
+    newState.date = action.date
+    return newState;
+  }
   if(action.type === 'ADD_LOCATIONS'){
     let newState = { ...state };
     newState.locations = action.locations
@@ -91,6 +97,26 @@ const dataReducer = (state = initState, action )=>{
   if(action.type === 'SET_TIMESTAMP'){
     let newState = { ...state };
     newState.timestamp = action.timestamp;
+    return newState;
+  }
+  if(action.type === 'SET_DATAARR'){
+    let newState = { ...state };
+    newState.dataArr = action.dataArr;
+    return newState;
+  }
+  if(action.type === 'SET_KEYFRAMES'){
+    let newState = { ...state };
+    newState.keyframes = action.keyframes;
+    return newState;
+  }
+  if(action.type === 'SET_PREV'){
+    let newState = { ...state };
+    newState.prev = action.prev;
+    return newState;
+  }
+  if(action.type === 'SET_NEXT'){
+    let newState = { ...state };
+    newState.prev = action.next;
     return newState;
   }
   return state;

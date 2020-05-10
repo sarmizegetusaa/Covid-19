@@ -54,13 +54,14 @@ class Dashboard extends Component {
         </div>
       
         <ul>
-          { this.props.activeCumulative ? (
+          { this.props.activeCumulative ?(
             confirmedLocations.map((location, idx)=>{
             return (<li key={idx}><span className={casesC}>{d3.format(',')(location[casesC])}</span> {location.countryRegion}</li>)
           })) : (
-            this.props.dashboardTimeline[`${casesC}`].map((location, idx)=>{
+            this.props.dashboardTimeline ?
+            (this.props.dashboardTimeline[`${casesC}`].map((location, idx)=>{
             return (<li key={idx}><span className={casesC}>{ d3.format(',')(location[this.props.nowCase])}</span> {location[1]}</li>)
-            })
+            })) : null
           )}
         </ul>
         <div id="cases-btns" className="cases-btns">

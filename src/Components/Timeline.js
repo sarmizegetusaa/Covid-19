@@ -61,17 +61,17 @@ class Timeline extends Component {
                     <br/>
                     { 
                       cases === 'confirmed' ? 
-                      (<div>Confirmed: <span className='confirmed'>{location[this.props.nowCase]}</span></div>) :
+                      (<div>Confirmed: <span className='confirmed'>{d3.format(',')(location[this.props.nowCase])}</span></div>) :
                       null
                     }
                     {
                       cases === 'deaths' ?
-                      (<div>Deaths: <span className='deaths'>{location[this.props.nowCase]}</span></div>) :
+                      (<div>Deaths: <span className='deaths'>{d3.format(',')(location[this.props.nowCase])}</span></div>) :
                       null
                     }             
                    { 
                     cases === 'recovered' ?
-                    (<div>Recovered: <span className='recovered'>{location[this.props.nowCase]}</span></div>) :
+                    (<div>Recovered: <span className='recovered'>{d3.format(',')(location[this.props.nowCase])}</span></div>) :
                     null
                    }
                   </div>
