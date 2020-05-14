@@ -2,6 +2,7 @@ import React, { Component, useRef} from 'react';
 import { connect } from 'react-redux';
 import * as d3 from 'd3';
 import { rollup, groups } from 'd3-array';
+import BarChartButtons from './BarChartButtons';
 
 class ClassBarChart extends Component {
 
@@ -10,70 +11,67 @@ class ClassBarChart extends Component {
     this.wrapperRef = React.createRef();
     this.svgRef = React.createRef();
   }
-
   componentDidMount(){
-  }
-  render(){
-    // let dashboardTimeline = this.props.dashboardTimeline;
-    // let date = this.props.date;
-    // let dataArr = [];
+    let dashboardTimeline = this.props.dashboardTimeline;
+    let date = this.props.date;
+    let cases = this.props.cases;
+    let dataArr = [];
   
-    // if(dashboardTimeline && dashboardTimeline.length>1){
-  
-    //   dashboardTimeline.confirmed.forEach((array, index)=>{
-    //     date.forEach((dat, idx) =>{
-    //       let obj = {
-    //         date: new Date(dat),
-    //         name: array[1],
-    //         value: parseInt(array[idx+4])
-    //       }
-    //       dataArr.push(obj)
-    //     })
-    //   })
-    // }
+    if(dashboardTimeline && dashboardTimeline.length > 1){
 
-    // console.log(dashboardTimeline)
+      dashboardTimeline[`${cases}`].forEach((array, index)=>{
+        date.forEach((dat, idx) =>{
+          let obj = {
+            date: new Date(dat),
+            name: array[1],
+            value: parseInt(array[idx+4])
+          }
+          dataArr.push(obj)
+        })
+      })
+      
+    }
+    
+    const names = new Set(dataArr.map(d => d.name));
 
-    // const names = new Set(dataArr.map(d => d.name));
-
-    // const dateValues = Array.from(rollup(dataArr, ([d]) => d.value, d => +d.date, d => d.name))
-    // .map(([date, dataArr]) => [new Date(date), dataArr])
-    // .sort(([a], [b]) => d3.ascending(a, b));
+    const dateValues = Array.from(rollup(dataArr, ([d]) => d.value, d => +d.date, d => d.name))
+    .map(([date, dataArr]) => [new Date(date), dataArr])
+    .sort(([a], [b]) => d3.ascending(a, b));
     
     const n = 12;
-    // function rank(value) {
-    //   const data = Array.from(names, name => ({name, value: value(name)}));
-    //   data.sort((a, b) => d3.descending(a.value, b.value));
-    //   for (let i = 0; i < data.length; ++i) data[i].rank = Math.min(n, i);
-    //   return data;
+    function rank(value) {
+      const data = Array.from(names, name => ({name, value: value(name)}));
+      data.sort((a, b) => d3.descending(a.value, b.value));
+      for (let i = 0; i < data.length; ++i) data[i].rank = Math.min(n, i);
+      return data;
+    }
+
+    const k = 2;
+    // const keyframes =()=> {
+      const keyframes = [];
+      let ka, a, kb, b;
+      for ([[ka, a], [kb, b]] of d3.pairs(dateValues)) {
+        for (let i = 0; i < k; ++i) {
+          const t = i / k;
+          keyframes.push([
+            new Date(ka * (1 - t) + kb * t),
+            rank(name => (a.get(name) || 0) * (1 - t) + (b.get(name) || 0) * t)
+          ]);
+        }
+      }
+      keyframes.push([ (kb), rank(name => b.get(name) || 0)]);
+      // return keyframes;
     // }
 
-    // const k = 2;
-    // // const keyframes =()=> {
-    //   const keyframes = [];
-    //   let ka, a, kb, b;
-    //   for ([[ka, a], [kb, b]] of d3.pairs(dateValues)) {
-    //     for (let i = 0; i < k; ++i) {
-    //       const t = i / k;
-    //       keyframes.push([
-    //         new Date(ka * (1 - t) + kb * t),
-    //         rank(name => (a.get(name) || 0) * (1 - t) + (b.get(name) || 0) * t)
-    //       ]);
-    //     }
-    //   }
-    //   keyframes.push([ (kb), rank(name => b.get(name) || 0)]);
-    //   // return keyframes;
-    // // }
-
-    // console.log('keyframes1', keyframes)
-    // const nameframes = groups(keyframes.flatMap(([, data]) => data), d => d.name);
-    // const prev = new Map(nameframes.flatMap(([, data]) => d3.pairs(data, (a, b) => [b, a])));
-    // const next = new Map(nameframes.flatMap(([, data]) => d3.pairs(data)))
+    console.log('keyframes1', keyframes)
+    const nameframes = groups(keyframes.flatMap(([, data]) => data), d => d.name);
+    const prev = new Map(nameframes.flatMap(([, data]) => d3.pairs(data, (a, b) => [b, a])));
+    const next = new Map(nameframes.flatMap(([, data]) => d3.pairs(data)))
   
-    const keyframes = this.props.keyframes;
-    const prev = this.props.prev;
-    const next = this.props.next;
-    const dataArr = this.props.dataArr
+    // const keyframes = this.props.keyframes;
+    // const prev = this.props.prev;
+    // const next = this.props.next;
+    // const dataArr = this.props.dataArr
   
     const svgRef = this.svgRef
     // const wrapperRef = useRef();
@@ -236,8 +234,6 @@ class ClassBarChart extends Component {
         };
       }
 
-        
-        setTimeout(()=>{
 
           async function chart(){
             const svg = d3.select(svgRef.current);
@@ -266,13 +262,12 @@ class ClassBarChart extends Component {
               await transition.end();
             }
           }
-          console.log('keyframes2', keyframes)
-          chart();
-        }, 1000)
        
+          chart();
+  }
 
- 
-
+  render(){
+   
     return (
       <React.Fragment>
         {/* <Test/> */}
@@ -281,6 +276,7 @@ class ClassBarChart extends Component {
             <svg className="chart" ref={this.svgRef}></svg>
           </div>
         </div>
+        <BarChartButtons/>
       </React.Fragment>
     )
   }
@@ -293,7 +289,8 @@ const mapStateToProps = (state) => {
     keyframes: state.keyframes,
     prev: state.prev,
     next: state.next,
-    dataArr: state.dataArr
+    dataArr: state.dataArr,
+    cases: state.cases
   }
 }
 

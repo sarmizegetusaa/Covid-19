@@ -30,7 +30,6 @@ class Header extends Component{
               <button id="recent-cases-btn" onClick={this.toggleCumulative}> <Link to='/'>Recent Cases</Link></button>
               <button id="timeline-btn" onClick={this.toggleTimeline}><Link to='/'>Timeline</Link></button>
               <button id="barchart" ><Link to='/barchart'>Barchart</Link></button>
-             
             </div>
             <div className="title">Coronavirus COVID-19 Global Cases</div>
           </div>

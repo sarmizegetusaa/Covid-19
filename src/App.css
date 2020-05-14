@@ -186,6 +186,7 @@ li {
    height: 900px;
    width: 1200px;
    margin-left: 30px;
+   background-color: #222;
  }
  .tick {
    color: #fff;
