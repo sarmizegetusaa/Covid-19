@@ -41,7 +41,7 @@ class Timeline extends Component {
         {this.props.timelineCases[`${cases}`] ? (this.props.timelineCases[`${cases}`].map((location, index)=>{
           let radius = d3.scaleLinear()
             .domain([this.props.minRadius, this.props.maxRadius])
-            .range([4, 60]);
+            .range([4, 30]);
           return(
               <Marker
                 key={index}

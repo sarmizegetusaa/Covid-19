@@ -13,7 +13,7 @@ function App() {
     <Router>
       <div className="App">
         <Header />
-        <Route path='/' component={Data}/>
+        <Route path={['/', '/barchart']} component={Data}/>
           <div className='container'>
             <Route path='/' exact component={MapCovid} />
             <Route path='/' exact component={Dashboard} />

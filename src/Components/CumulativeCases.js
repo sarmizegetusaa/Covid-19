@@ -12,7 +12,7 @@ class CumulativeCases extends Component {
             const radiusC = this.props.cases;
             let radius = d3.scaleLinear()
               .domain([this.props.minRadius, this.props.maxRadius])
-              .range([7, 120]);
+              .range([7, 70]);
               
             return (
               <Marker

@@ -218,7 +218,7 @@ const Barchart = () => {
           };
         }
 
-        async function chart(){
+       const startC = async function chart(){
           const svg = d3.select(svgRef.current);
           const updateAxis = axis(svg);
           const updateBars = bars(svg);
@@ -241,9 +241,9 @@ const Barchart = () => {
             await transition.end();
           }
         }
-      chart();
+      startC();
     }
-    startChart(cases)
+      startChart(cases)
   }, [cases]);
   return (
     <React.Fragment>

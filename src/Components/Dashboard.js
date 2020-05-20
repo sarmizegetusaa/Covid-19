@@ -3,6 +3,22 @@ import * as d3 from 'd3';
 import { connect } from 'react-redux';
 
 class Dashboard extends Component {
+
+  state = {
+    border:{
+      "confirmed": "1px solid #ad4828",
+      "recovered": "1px solid #244624",
+      "active": "1px solid #5c5c39",
+      "deaths": "1px solid #712424",
+    },
+    borderTop:{
+      "confirmed": "5px solid #ad4828",
+      "recovered": "5px solid #244624",
+      "active": "5px solid #5c5c39",
+      "deaths": "5px solid #712424",
+    }
+  }
+
   handleChangeConfirm = () =>{
     const cases = 'confirmed';
     this.props.onChangeButton(cases);
@@ -43,9 +59,15 @@ class Dashboard extends Component {
 
       return (
       <div className='dashboard'>
-        <div id="header-statistics">
+        <div 
+          id="header-statistics"
+          style={{border: this.state.border[`${casesC}`]}}
+        >
         <div id="type-cases">{casesC.charAt(0).toUpperCase() + casesC.slice(1)}</div>
-          <div id="number-cases" className={casesC}>
+          <div 
+            id="number-cases" 
+            className={casesC}
+          >
             { this.props.activeCumulative ? 
               d3.format(',')(this.props.globalValues[casesC]) :
               d3.format(',')(totalTimelineCases)
@@ -53,7 +75,7 @@ class Dashboard extends Component {
           </div>
         </div>
       
-        <ul>
+        <ul style={{border: this.state.border[`${casesC}`]}}>
           { this.props.activeCumulative ?(
             confirmedLocations.map((location, idx)=>{
             return (<li key={idx}><span className={casesC}>{d3.format(',')(location[casesC])}</span> {location.countryRegion}</li>)
@@ -64,11 +86,30 @@ class Dashboard extends Component {
             })) : null
           )}
         </ul>
-        <div id="cases-btns" className="cases-btns">
-          <button className="confirmed-btn btn" onClick={this.handleChangeConfirm}>Confirmed</button>
-          {this.props.activeCumulative ? ( <button className="active-btn btn" onClick={this.handleChangeActive}>Active</button>) : null}
-          <button className="recovered-btn btn" onClick={this.handleChangeRecovered}>Recovered</button>
-          <button className="deaths-btn btn" onClick={this.handleChangeDeaths}>Deaths</button>
+        <div 
+          id="cases-btns"  
+          className="cases-btns"
+          style={{borderTop: this.state.borderTop[`${casesC}`]}}
+        >
+          <button 
+            className={casesC == 'confirmed' ? "btn " + casesC + "-btn" : "btn"}
+            onClick={this.handleChangeConfirm}>Confirmed
+          </button>
+          {this.props.activeCumulative ? 
+            ( <button 
+                className={casesC == 'active' ? "btn " + casesC + "-btn" : "btn"}
+                onClick={this.handleChangeActive}>Active
+                </button>) 
+            : (null)
+          }
+          <button 
+            className={casesC == 'recovered' ? "btn " + casesC + "-btn" : "btn"}
+            onClick={this.handleChangeRecovered}>Recovered
+            </button>
+          <button 
+            className={casesC == 'deaths' ? "btn " + casesC + "-btn" : "btn"}
+            onClick={this.handleChangeDeaths}>Deaths
+            </button>
         </div>
       </div>
     )

@@ -14,13 +14,12 @@ body {
   border: #717171 1px solid;
 }
 .true{
-  /* opacity: 1; */
   display: block;
 }
 .false{
   display: none;
-  /* opacity: 0; */
 }
+/* Header */
 #container-header{
   display: grid;
   grid-template-columns: 4fr 1fr;
@@ -34,9 +33,10 @@ body {
   display: grid;
   align-items: center;
 }
-#header .title{
-  text-align: right;
-  margin-right: 10px;
+#container-header .title{
+  text-align: end;
+  align-self: center;
+  margin-right: 6px;
 }
 a {
   text-decoration: none;
@@ -46,10 +46,11 @@ a {
   border: none;
   color: #fff;
   background-color: #333;
-  padding: 0.4rem;
-  font-size: 0.9rem;
+  padding: 0.5rem 2rem 0.5rem 2rem;
+  font-size: 1rem;
   margin-right: 0.5rem;
 }
+
 /* popup */
 .leaflet-popup-content-wrapper, .leaflet-popup-tip {
   background: #383737;
@@ -74,29 +75,48 @@ a {
   margin-right: 0.5rem;
 }
 .confirmed {
-  color: rgb(204, 183, 183);
+  color: #ad4828;
   font-weight: 800;
 }
 .deaths {
-  color: #ff0000;
+  color:  #712424;
   font-weight: 800;
-}
-.background-deaths{
-  background-color: rgba(255, 0, 0, 0.3);
-}
-.background-recovered{
-  background-color: rgba(0, 112, 0, 0.3);
-}
-.background-active{
-  background-color: rgba(187, 187, 70, 0.3);
 }
 .recovered {
-  color: rgb(0, 112, 0);
+  color: #244624;
   font-weight: 800;
 }
+.confirmed-btn{
+  background: #ad4828 !important;
+}
+.active-btn{
+  background-color: #5c5c39 !important;
+}
+.recovered-btn{
+  background-color: #244624 !important;
+}
+.deaths-btn{
+  background-color: #712424 !important;
+}
 .active {
-  color: rgb(187, 187, 70);
+  color: #5c5c39;
   font-weight: 800;
+}
+.background-confirmed {
+  background: #ad4828 !important;
+  opacity: 0.7;
+}
+.background-deaths{
+  background-color: #712424 !important;
+  opacity: 0.7;
+}
+.background-recovered{
+  background-color: #244624 !important;
+  opacity: 0.7;
+}
+.background-active{
+  background-color: #5c5c39 !important;
+  opacity: 0.7;
 }
 .marker {
   box-sizing: border-box;
@@ -107,9 +127,6 @@ a {
 }
 .marker_booking {
   background: yellowgreen;
-}
-.background-confirmed {
-  background: rgba(255, 87, 34, 0.6);
 }
 #timestamp{
   color: #fff;
@@ -137,21 +154,22 @@ a {
 #number-cases{
   text-align: center;
   font-size: 2.7rem;
-  /* color: #fff; */
   font-weight: 600;
-  margin-top: 0.5rem;
+  margin-top: 0.5rem;  
 }
 .btn {
   padding: 0.4rem;
   background-color: #333;
   border: none;
-  font-size: 1rem;
+  font-size: 0.8rem;
   color: #fff;
   margin-right: 0.5rem;
+  width: 20%;
 }
 .cases-btns{
-  position: absolute;              
   bottom:0;
+  border-top: 5px solid #ad4828;
+  margin-top: -8px;
 }
 ul{
   border: #717171 1px solid;
@@ -191,3 +209,6 @@ li {
  .tick {
    color: #fff;
  }
+ *:focus {
+  outline: 0 !important;
+}
