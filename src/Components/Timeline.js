@@ -7,14 +7,14 @@ import { connect } from 'react-redux';
 class Timeline extends Component {
 
   componentDidMount(){
-    let intervalId = setInterval(this.timer, 100);
+    let intervalId = setInterval(this.timer, 150);
     this.props.addIntervalId(intervalId);
   }
-
+  
   componentWillUnmount(){
     clearInterval(this.props.intervalId)
   }
-
+  
   timer = () => {
     let timelineCasesLength;
 
@@ -32,7 +32,16 @@ class Timeline extends Component {
       <div>
         {
           ! this.props.activeCumulative ?
-          (<div id='timestamp'>
+          (
+          
+          <div id='timestamp'>
+            <div className="watch_outline">
+            <div 
+              className="minutes"
+              style={{animation: (this.props.nowCase +1 == this.props.timelineLength) ? "none" : "spinTheClock 1s infinite linear" }}
+            >
+            </div>
+          </div> 
           { this.props.timestamp[this.props.nowCase-4] }
         </div>) :
         null

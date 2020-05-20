@@ -199,6 +199,7 @@ li {
   border-bottom: #717171 1px solid;
   padding: 0.3rem 0 0.3rem 0.9rem;
  }
+ 
  /* bar chart */
  .chart {
    height: 900px;
@@ -211,4 +212,34 @@ li {
  }
  *:focus {
   outline: 0 !important;
+}
+
+/* timeline clock */
+.watch_outline {
+  background-color: #f0f0f0;
+  position: fixed;
+  height: 25px;
+  width: 25px;
+  border: 3px solid #424445;
+  border-radius: 50%;
+  right: 25vw
+}
+
+.minutes {
+  border: 1px solid #424445;
+  background-color: #424445;
+  border-radius: 50px;
+  position: absolute;
+  left: 45%;
+  top: -10%;
+  height: 13px;
+  width: 1px;
+  transform-origin: 50% 95%;
+}
+
+@keyframes spinTheClock {
+  100% {
+    transform: rotate(360deg);
+    transform-origin: 50% 90%;
+  }
 }
