@@ -2,10 +2,9 @@ import React from 'react';
 import Header from './Components/Header';
 import MapCovid from './Components/MapCovid';
 import Dashboard from './Components/Dashboard';
-import BarChart from './Components/BarChart';
-import ClassBarChart from './Components/ClassBarChart';
 import Data from './Components/Data';
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import Charts from './Components/Charts';
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import './App.css';
 
 function App() {
@@ -17,10 +16,8 @@ function App() {
           <div className='container'>
             <Route path='/' exact component={MapCovid} />
             <Route path='/' exact component={Dashboard} />
-            <Route path='/barchart' component={BarChart}/>
-            <Route path='/bar' component={ClassBarChart}/>
-            {/* <Redirect from='/bar' to="/barchart/" /> */}
-        </div>
+          </div>
+            <Route path='/charts' component={Charts}/>
       </div>
     </Router>
   );

@@ -1,9 +1,11 @@
 .App {
-  /* text-align: center; */
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
 }
-body {
+body, .leaflet-container {
   background: #222;
 }
+
 .container{
   display: grid;
   grid-template-columns: 4fr 1fr;
@@ -29,8 +31,8 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 #header {
-  grid-template-columns: 3fr 5fr;
-  display: grid;
+  /* grid-template-columns: 3fr 5fr;
+  display: grid; */
   align-items: center;
 }
 #container-header .title{
@@ -41,6 +43,9 @@ body {
 a {
   text-decoration: none;
   color: #fff;
+}
+.page-btns {
+  text-align: initial;
 }
 .page-btns button {
   border: none;
@@ -181,6 +186,7 @@ ul{
   padding: 0px;
   overflow-y: auto;
   border-bottom: 1px solid #717171;
+  text-align: left !important;
 }
 ul::-webkit-scrollbar {
   width: 12px;
@@ -199,20 +205,6 @@ li {
   border-bottom: #717171 1px solid;
   padding: 0.3rem 0 0.3rem 0.9rem;
  }
- 
- /* bar chart */
- .chart {
-   height: 900px;
-   width: 1200px;
-   margin-left: 30px;
-   background-color: #222;
- }
- .tick {
-   color: #fff;
- }
- *:focus {
-  outline: 0 !important;
-}
 
 /* timeline clock */
 .watch_outline {
@@ -242,4 +234,85 @@ li {
     transform: rotate(360deg);
     transform-origin: 50% 90%;
   }
+}
+
+ /* bar chart */
+ .barchart-title{
+   text-align: end;
+   margin: 0 auto;
+   font-size: 1.5rem;
+   color: #ccc;
+   width: 1000px;
+   margin-bottom: 1rem;
+   font-weight: 600;
+ }
+ .chart {
+  height: 630px;
+  width: 1000px;
+  background-color: #222;
+}
+.tick {
+  color: #fff;
+}
+*:focus {
+ outline: 0 !important;
+}
+
+.svg-container {
+  height: 80vh;
+  /* width: 1200px; */
+}
+
+/* stacked area chart */
+.title-stacked-chart{
+  margin: 0 auto;
+  font-size: 1.5rem;
+  color: #ccc;
+  width: 1000px;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  text-align: end;
+}
+.stacked-chart-container{
+  /* width: 70%; */
+  height: 600px;
+  margin: 2rem;
+}
+.svg-stacked-container {
+  height: 75%;
+  width: 55%;
+  margin: 0 auto;
+}
+
+.svg-stacked-container svg{
+  display: block;
+  width: 85%;
+  overflow: visible;
+  margin-left: 3vw;
+  margin-top: 5rem;
+}
+
+div.tooltip {	
+  position: absolute;
+  text-align: start;
+  width: 150px;	
+  height: fit-content;	
+  padding: 7px;				
+  font: 13px sans-serif;		
+  background: rgba(79, 79, 79, 0.7);	
+  border: 0px;
+  border-radius: 8px;			
+  pointer-events: none;
+  color: #fff;
+  font-weight: 600;
+  line-height: 1.5;
+  z-index: 99999;
+}
+.tooltip{
+  margin-left: -14px;
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 5px;
 }

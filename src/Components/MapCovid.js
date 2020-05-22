@@ -3,7 +3,6 @@ import { Map, TileLayer } from 'react-leaflet';
 import { connect } from 'react-redux';
 import Timeline from './Timeline';
 import CumulativeCases from './CumulativeCases';
-import BarChart from './CumulativeCases';
 
 class MapCovid extends Component{
   
@@ -39,7 +38,8 @@ class MapCovid extends Component{
 const mapStateToProps = (state) => {
   return {
     locations: state.locations,
-    cases: state.cases
+    cases: state.cases,
+    timelineCases: state.timelineCases
   }
 }
 

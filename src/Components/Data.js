@@ -20,7 +20,7 @@ class Data extends Component {
       recovered: []
     };
     let csvData = {};
-    typeOfCases.forEach(type => {
+    typeOfCases.forEach((type, typeIdx) => {
       fetch(`https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_${type}_global.csv`)
         .then(res => res.text())
         .then(text => {
@@ -76,12 +76,16 @@ class Data extends Component {
           },700)
           setTimeout(()=>{
             this.props.setDashboardTimeline(dashboardTimeline)
-          }, 500)
+          }, 800);
           
+          if (typeIdx === typeOfCases.length-1) {
+            setTimeout(()=>{
+              this.props.addTimelineCases(allTimelineCases);
+            }, 600);
+          }
         })
         .catch(() => this.setState({ hasErrors: true }));
-        this.props.addTimelineCases(allTimelineCases);
-    });
+      });
 
         fetch("https://covid19.mathdro.id/api/confirmed")
         .then(res => res.json())

@@ -9,15 +9,18 @@ class Timeline extends Component {
   componentDidMount(){
     let intervalId = setInterval(this.timer, 150);
     this.props.addIntervalId(intervalId);
+    // console.log('from mounting',this.props.timelineCases)
   }
   
   componentWillUnmount(){
     clearInterval(this.props.intervalId)
   }
-  
   timer = () => {
     let timelineCasesLength;
-
+    if(this.props.timelineCases.length === 0){
+      return
+    }
+    // console.log('from timeout',this.props.timelineCases)
     setTimeout(()=>{
       timelineCasesLength = this.props.timelineCases.confirmed[0].length;
       if(this.props.nowCase < timelineCasesLength -1){
@@ -27,7 +30,9 @@ class Timeline extends Component {
 
   }
   render() {
+    // console.log('from render',this.props.timelineCases)
     let cases = this.props.cases;
+ 
     return (
       <div>
         {
@@ -38,7 +43,7 @@ class Timeline extends Component {
             <div className="watch_outline">
             <div 
               className="minutes"
-              style={{animation: (this.props.nowCase +1 == this.props.timelineLength) ? "none" : "spinTheClock 1s infinite linear" }}
+              style={{animation: (this.props.nowCase +1 === this.props.timelineLength) ? "none" : "spinTheClock 1s infinite linear" }}
             >
             </div>
           </div> 

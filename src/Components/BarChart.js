@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useCallback, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
 import { rollup, groups } from 'd3-array';
 import { useSelector } from "react-redux";
@@ -18,8 +18,11 @@ const Barchart = () => {
 
   useEffect(()=>{
 
-    function startChart(cases){
+    if(dashboardTimeline.length === 0){
+      return
+    }
 
+    function startChart(cases) {
       d3.select('#cases-btns').style('opacity', '0')
 
       dashboardTimeline[`${cases}`].forEach((array, index)=>{
@@ -94,8 +97,8 @@ const Barchart = () => {
 
         const color ={
           "confirmed": "#a74222",
-          "recovered": "#183a18",
-          "deaths": "#651818"
+          "recovered": "#244624",
+          "deaths": "#712424"
         }
 
         function bars(svg){
@@ -211,7 +214,7 @@ const Barchart = () => {
             transition.end().then(() => { now.text(formatDate(date))})
             .catch((err)=>console.log(err))
             
-            let dt = new Date;
+            let dt = new Date();
             if(formatDate(date) == formatDate(dt.setDate(dt.getDate() - 2))){
               d3.select('#cases-btns').style('opacity', '1')
             }
@@ -244,20 +247,44 @@ const Barchart = () => {
       startC();
     }
       startChart(cases)
-  }, [cases]);
+  }, [cases, dashboardTimeline, dataArr, date]);
+
+  function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+  
   return (
     <React.Fragment>
-      {/* <Test/> */}
       <div className="chart-container">
         <div className="svg-container">
-        {/* <div className="svg-container" ref={wrapperRef}> */}
+          <p className="barchart-title">{capitalizeFirstLetter(cases)} cases</p>
           <svg className="chart" ref={svgRef}></svg>
+          <div 
+            id="cases-btns" 
+            className="cases-btns"
+            style={{borderTop: "none",
+                    width: "1000px",
+                    margin: "0 auto",
+                    textAlign: "end"
+                  }}
+          >
+            <button 
+              style={{ width: "10%" }} 
+              className="confirmed-btn btn" 
+              onClick={() => setState('confirmed')}>Confirmed
+            </button>
+            <button 
+              style={{ width: "10%" }}
+              className="recovered-btn btn" 
+              onClick={() => setState('recovered')}>Recovered
+            </button>
+            <button 
+              className="deaths-btn btn"
+              style={{ width: "10%" }}
+              onClick={() => setState('deaths')}>Deaths
+            </button>
+          </div>
         </div>
-      </div>
-      <div id="cases-btns" className="cases-btns">
-        <button className="confirmed-btn btn" onClick={() => setState('confirmed')}>Confirmed</button>
-        <button className="recovered-btn btn" onClick={() => setState('recovered')}>Recovered</button>
-        <button className="deaths-btn btn" onClick={() => setState('deaths')}>Deaths</button>
       </div>
     </React.Fragment>
   )

@@ -1,18 +1,20 @@
 const initState = {
-  hasErrors: false,
   activeCumulative: true,
   activeTimeline: false,
-  locations: [],
   allLocations: [],
   cases: 'confirmed',
-  timelineCases: [],
+  computedData: [],
   dashboardTimeline: [],
-  timelineLength: 0,
-  numberOfCases: 0,
-  nowCase: 3,
   globalValues: {},
+  hasErrors: false,
+  keyframes: [],
+  locations: [],
+  nowCase: 3,
+  numberOfCases: 0,
+  timelineCases: [],
+  timelineCasesLoaded: false,
+  timelineLength: 0,
   timestamp:[],
-  keyframes: []
 }
 
 const dataReducer = (state = initState, action )=>{
@@ -56,6 +58,7 @@ const dataReducer = (state = initState, action )=>{
   }
   if(action.type === 'ADD_TIMELINECASES'){
     let newState = { ...state };
+    newState.timelineCasesLoaded = true;
     newState.timelineCases = action.timelineCases;
     return newState;
   }

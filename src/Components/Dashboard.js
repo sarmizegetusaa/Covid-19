@@ -40,6 +40,9 @@ class Dashboard extends Component {
     this.props.addNowCase(3);
   }
   totalDashboad = (casesC) => {
+    if(this.props.dashboardTimeline.length === 0){
+      return;
+    }
     const dashCases = this.props.dashboardTimeline[casesC];
     if (dashCases) {
       return dashCases.reduce((accumulator, currentVal) => {
@@ -92,22 +95,22 @@ class Dashboard extends Component {
           style={{borderTop: this.state.borderTop[`${casesC}`]}}
         >
           <button 
-            className={casesC == 'confirmed' ? "btn " + casesC + "-btn" : "btn"}
+            className={casesC === 'confirmed' ? "btn " + casesC + "-btn" : "btn"}
             onClick={this.handleChangeConfirm}>Confirmed
           </button>
           {this.props.activeCumulative ? 
             ( <button 
-                className={casesC == 'active' ? "btn " + casesC + "-btn" : "btn"}
+                className={casesC === 'active' ? "btn " + casesC + "-btn" : "btn"}
                 onClick={this.handleChangeActive}>Active
                 </button>) 
             : (null)
           }
           <button 
-            className={casesC == 'recovered' ? "btn " + casesC + "-btn" : "btn"}
+            className={casesC === 'recovered' ? "btn " + casesC + "-btn" : "btn"}
             onClick={this.handleChangeRecovered}>Recovered
             </button>
           <button 
-            className={casesC == 'deaths' ? "btn " + casesC + "-btn" : "btn"}
+            className={casesC === 'deaths' ? "btn " + casesC + "-btn" : "btn"}
             onClick={this.handleChangeDeaths}>Deaths
             </button>
         </div>
