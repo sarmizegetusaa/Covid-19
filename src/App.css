@@ -21,6 +21,12 @@ body, .leaflet-container {
 .false{
   display: none;
 }
+.active-tooltip{
+  display: block;
+}
+.inactive-tooltip{
+  display: none;
+}
 /* Header */
 #container-header{
   display: grid;
@@ -83,11 +89,13 @@ a {
   font-weight: 800;
 }
 .deaths {
-  color:  #712424;
+  /* color:  #712424; */
+  color:  #942828;
   font-weight: 800;
 }
 .recovered {
-  color: #244624;
+  /* color: #244624; */
+  color: #008211;
   font-weight: 800;
 }
 .confirmed-btn{
@@ -235,7 +243,14 @@ li {
   }
 }
 
+.charts-container{
+  display: grid;
+  grid-template-rows: 1.2fr 1fr;
+}
  /* bar chart */
+ .chart-container{
+
+ }
  .barchart-title{
    text-align: end;
    margin: 0 auto;
@@ -258,7 +273,8 @@ li {
 }
 
 .svg-container {
-  height: 80vh;
+  height: 100vh;
+  margin-top: 2rem;
 }
 
 /* stacked area chart */
@@ -273,11 +289,11 @@ li {
 }
 .stacked-chart-container{
   height: 600px;
-  margin: 2rem;
+  margin-top: 5rem;
 }
 .svg-stacked-container {
   height: 75%;
-  width: 55%;
+  width: 52%;
   margin: 0 auto;
 }
 
@@ -285,7 +301,6 @@ li {
   display: block;
   width: 85%;
   overflow: visible;
-  margin-left: 3vw;
   margin-top: 5rem;
 }
 

@@ -4,7 +4,7 @@ import StackedAreaChart from './StackedAreaChart';
 
 const Charts = () => {
   return (
-    <div>
+    <div className="charts-container">
       <BarChart/>
       <StackedAreaChart/>
     </div>

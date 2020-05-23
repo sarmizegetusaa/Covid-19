@@ -23,12 +23,12 @@ class CumulativeCases extends Component {
                 ]}
                 icon={L.divIcon({
                   html: "",
-                  className: `marker background-${this.props.cases} ${this.props.activeCumulative}`,
+                  className: `marker background-${this.props.cases} ${this.props.activeCumulative.toString()}`,
                   iconSize: L.point(parseInt(radius(location[radiusC])), parseInt(radius(location[radiusC])), true)
                 })}
                 >
                 <Popup>
-                  <div id='popup' className={this.props.activeCumulative}>
+                  <div id='popup' className={this.props.activeCumulative.toString()}>
                     {(location.provinceState !== null )? location.provinceState : null} {location.countryRegion}
                     <br/>
                     <div>Confirmed: <span className='confirmed'>{d3.format(',')(location.confirmed)}</span></div>

@@ -65,12 +65,12 @@ class Timeline extends Component {
                 ]}
                 icon={L.divIcon({
                   html: "",
-                  className: `marker background-${this.props.cases} ${! this.props.activeCumulative}`,
+                  className: `marker background-${this.props.cases} ${this.props.activeTimeline.toString()}`,
                   iconSize: L.point(parseInt(radius(location[this.props.nowCase])), parseInt(radius(location[this.props.nowCase])), true)
                 })}
                 >
                 <Popup>
-                  <div id='popup' className={!this.props.activeCumulative}>
+                  <div id='popup' className={this.props.activeTimeline.toString()}>
                     {(location[0] !== undefined ) ? location[0] : null} {location[1]}
                     <br/>
                     { 
@@ -104,6 +104,7 @@ const mapStateToProps = (state) => {
     locations: state.locations,
     cases: state.cases,
     activeCumulative: state.activeCumulative,
+    activeTimeline: state.activeTimeline,
     timelineCases: state.timelineCases,
     nowCase: state.nowCase,
     intervalId: state.intervalId,
