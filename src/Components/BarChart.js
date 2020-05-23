@@ -2,6 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
 import { rollup, groups } from 'd3-array';
 import { useSelector } from "react-redux";
+import Aos from 'aos';
+import 'aos/dist/aos.css';
+import ChartFirstPage from './ChartFirstPage';
 import useResizeObserver from "../utils/useResizeObserver";
 
 const Barchart = () => {
@@ -14,17 +17,20 @@ const Barchart = () => {
   const wrapperRef = useRef();
   // const dimensions = useResizeObserver(wrapperRef);
 
-  const [cases, setState ] = useState('confirmed');
+  const [cases, setState ] = useState('');
+  const [ hide, hideChartFirstPage ] = useState('')
+  const [ show, showBarChartTitle ] = useState('')
 
   useEffect(()=>{
-
     if(dashboardTimeline.length === 0){
       return
     }
-
     function startChart(cases) {
       d3.select('#cases-btns').style('opacity', '0')
 
+      hideChartFirstPage('hide-component');
+      showBarChartTitle('show-component');
+      console.log(show)
       dashboardTimeline[`${cases}`].forEach((array, index)=>{
         date.forEach((dat, idx) =>{
           let obj = {
@@ -222,12 +228,13 @@ const Barchart = () => {
         }
 
        const startC = async function chart(){
-          const svg = d3.select(svgRef.current);
-          const updateAxis = axis(svg);
-          const updateBars = bars(svg);
-          const updateLabels = labels(svg);
-          const updateTicker = ticker(svg);
-
+         
+         const svg = d3.select(svgRef.current);
+         const updateAxis = axis(svg);
+         const updateBars = bars(svg);
+         const updateLabels = labels(svg);
+         const updateTicker = ticker(svg);
+         
           for (const keyframe of keyframes) {
             const transition = svg.transition()
                 .duration(duration)
@@ -246,7 +253,11 @@ const Barchart = () => {
         }
       startC();
     }
+    if(cases === ''){
+      return
+    } else {
       startChart(cases)
+    }
   }, [cases, dashboardTimeline, dataArr, date]);
 
   function capitalizeFirstLetter(string) {
@@ -257,8 +268,9 @@ const Barchart = () => {
     <React.Fragment>
       <div className="chart-container">
         <div className="svg-container">
-          <p className="barchart-title">{capitalizeFirstLetter(cases)} cases</p>
+          <p className={"barchart-title " + show}>{capitalizeFirstLetter(cases)} cases</p>
           <svg className="chart" ref={svgRef}></svg>
+          <ChartFirstPage props={hide}/>
           <div 
             id="cases-btns" 
             className="cases-btns"
@@ -267,6 +279,10 @@ const Barchart = () => {
                     margin: "0 auto",
                     textAlign: "end"
                   }}
+            data-aos="fade-up"
+            data-aos-offset="200"
+            data-aos-delay="50"
+            data-aos-duration="2000"
           >
             <button 
               style={{ width: "10%" }} 

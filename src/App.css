@@ -21,11 +21,11 @@ body, .leaflet-container {
 .false{
   display: none;
 }
-.active-tooltip{
-  display: block;
-}
-.inactive-tooltip{
+.hide-component{
   display: none;
+}
+.show-component{
+  display: block !important ;
 }
 /* Header */
 #container-header{
@@ -245,12 +245,83 @@ li {
 
 .charts-container{
   display: grid;
-  grid-template-rows: 1.2fr 1fr;
+  grid-template-rows: 1fr 1fr;
 }
- /* bar chart */
- .chart-container{
 
+ /* first chart page */
+ .chart-first-page{
+  position: absolute;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 1000px;
+  margin: 0 auto;
+  top: 20vh;
+  width: 45vw;
+  left: 30vw;
+  height: 50vh;
  }
+ .title-left p{
+  font-size: 3.3rem;
+  color: #ccc;
+  text-align: initial;
+  font-weight: 700;
+ }
+ .title-right{
+   align-self: flex-end;
+ }
+ .title-right p:first-of-type {
+  font-size: 1.3rem;
+ }
+ .title-right p {
+  font-size: 1rem;
+  color: #ccc;
+  text-align: initial;
+  font-weight: 700;
+  text-align: end;
+  margin: 5px;
+ }
+ .chart-first-page svg {
+  transition: inherit;
+  position: fixed;
+  margin-top: -24vh;
+  margin-left: -24vw;
+ }
+ .icon-barchart {
+   transform: scale(0.3) rotate(90deg);
+ }
+
+.mouse-scroll{
+  /* display: none; */
+  margin: 0 auto;
+  margin-top: -1rem;
+  position: relative;
+  width: 25px;
+  height: 38px;
+  box-shadow: inset 0 0 0 2px #fff;
+  border-radius: 25px;
+}
+.mouse-scroll::before{
+  position: absolute;
+  content: "";
+  width: 4px;
+  height: 4px;
+  background: #fff;
+  top: 10px;
+  left: 11px;
+  border-radius: 50%;
+  -webkit-animation-duration: 1.5s;
+  animation-duration: 1.5s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-name: scroll;
+  animation-name: scroll
+}
+@keyframes scroll{
+  0% { opacity:1 }
+  to { opacity:0; transform:translateY(25px) }
+}
+
+ /* bar chart */
  .barchart-title{
    text-align: end;
    margin: 0 auto;
@@ -259,6 +330,7 @@ li {
    width: 1000px;
    margin-bottom: 1rem;
    font-weight: 600;
+   display: none;
  }
  .chart {
   height: 630px;

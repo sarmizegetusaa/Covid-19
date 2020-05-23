@@ -9,7 +9,6 @@ class Timeline extends Component {
   componentDidMount(){
     let intervalId = setInterval(this.timer, 150);
     this.props.addIntervalId(intervalId);
-    // console.log('from mounting',this.props.timelineCases)
   }
   
   componentWillUnmount(){
@@ -20,7 +19,6 @@ class Timeline extends Component {
     if(this.props.timelineCases.length === 0){
       return
     }
-    // console.log('from timeout',this.props.timelineCases)
     setTimeout(()=>{
       timelineCasesLength = this.props.timelineCases.confirmed[0].length;
       if(this.props.nowCase < timelineCasesLength -1){
@@ -30,7 +28,6 @@ class Timeline extends Component {
 
   }
   render() {
-    // console.log('from render',this.props.timelineCases)
     let cases = this.props.cases;
  
     return (

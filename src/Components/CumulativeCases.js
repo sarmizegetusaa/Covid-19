@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 
 class CumulativeCases extends Component {
   render() {
+    console.log(this.props.locations)
+    // console.log(this.props.activeCumulative)
     return (
       <div>
         {this.props.locations.map((location, index)=>{

@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import * as d3 from "d3";
+import Aos from 'aos';
+import 'aos/dist/aos.css';
 import useResizeObserver from "../utils/useResizeObserver";
 
 const StackedAreaChart = () => {
@@ -13,6 +15,7 @@ const StackedAreaChart = () => {
   let timestamp = useSelector(state => state.timestamp);
   
   useEffect(() => {
+    Aos.init({duration: 3000})
     const { width, height } =
     dimensions || wrapperRef.current.getBoundingClientRect()
     const arrayCases = ["confirmed", "recovered", "deaths"];
@@ -224,7 +227,7 @@ const StackedAreaChart = () => {
     <React.Fragment>
     <div className="stacked-chart-container">
       <p className="title-stacked-chart">Covid-19 Cases</p>
-      <div className="svg-stacked-container" ref={wrapperRef}>
+      <div data-aos="slide-up" className="svg-stacked-container" ref={wrapperRef}>
         <svg className="stacked-chart" ref={svgRef}></svg>
       </div>
     </div>
