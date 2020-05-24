@@ -10,26 +10,27 @@ class Timeline extends Component {
     let intervalId = setInterval(this.timer, 150);
     this.props.addIntervalId(intervalId);
   }
-  
+
   componentWillUnmount(){
     clearInterval(this.props.intervalId)
   }
+  
   timer = () => {
     let timelineCasesLength;
     if(this.props.timelineCases.length === 0){
       return
     }
-    setTimeout(()=>{
-      timelineCasesLength = this.props.timelineCases.confirmed[0].length;
-      if(this.props.nowCase < timelineCasesLength -1){
-        this.props.addNowCase(this.props.nowCase +1)
-      }
-    }, 500)
-
+    if(this.props.activeTimeline == true){
+      setTimeout(()=>{
+        timelineCasesLength = this.props.timelineCases.confirmed[0].length;
+        if(this.props.nowCase < timelineCasesLength -1){
+          this.props.addNowCase(this.props.nowCase +1)
+        }
+      }, 500)
+    }
   }
   render() {
     let cases = this.props.cases;
- 
     return (
       <div>
         {
@@ -114,7 +115,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     addNowCase: (nowCase) => { dispatch({type: 'ADD_NOWCASE', nowCase: nowCase})},
-    addIntervalId: (intervalId) => { dispatch({type: 'ADD_INTERVALID', intervalId: intervalId})}
+    addIntervalId: (intervalId) => { dispatch({type: 'ADD_INTERVALID', intervalId: intervalId})},
   }
 }
 
