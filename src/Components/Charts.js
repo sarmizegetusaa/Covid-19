@@ -1,7 +1,7 @@
 import React from 'react';
 import BarChart from './BarChart';
 import StackedAreaChart from './StackedAreaChart';
-import ChartFirstPage from './ChartFirstPage';
+// import ChartFirstPage from './ChartFirstPage';
 
 const Charts = () => {
   

@@ -281,7 +281,7 @@ const Barchart = () => {
                   }}
             data-aos="fade-up"
             data-aos-offset="200"
-            data-aos-delay="50"
+            data-aos-delay="500"
             data-aos-duration="2000"
           >
             <button 

@@ -260,20 +260,26 @@ li {
   left: 30vw;
   height: 50vh;
  }
+ .icon-barchart{
+  enable-background:"new 0 0 512 512";
+  transition: "inherit";
+  transform: "rotate(90deg);transform: scale(0.3)"
+ }
  .title-left p{
   font-size: 3.3rem;
   color: #ccc;
   text-align: initial;
   font-weight: 700;
+  max-width: 300px;;
  }
  .title-right{
    align-self: flex-end;
  }
- .title-right p:first-of-type {
-  font-size: 1.3rem;
+ .title-right .text-scroll p {
+  font-size: 1.2rem;
  }
  .title-right p {
-  font-size: 1rem;
+  font-size: 1.3rem;
   color: #ccc;
   text-align: initial;
   font-weight: 700;
@@ -299,6 +305,8 @@ li {
   height: 38px;
   box-shadow: inset 0 0 0 2px #fff;
   border-radius: 25px;
+  left:-4rem;
+  top: -1rem;
 }
 .mouse-scroll::before{
   position: absolute;
