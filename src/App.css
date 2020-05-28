@@ -199,6 +199,14 @@ a {
   margin-top: -8px;
   /* width: 70%; */
 }
+.cases
+.cases-btns .btn{
+ width: 10%;
+}
+.cases
+#cases-btns{
+  width: 70%;
+}
 ul{
   border: #717171 1px solid;
   display: block;
@@ -260,7 +268,6 @@ li {
 
 .charts-container{
   display: grid;
-  grid-template-rows: 1fr 1fr;
   width: 70%;
   margin: 0 auto;
 }
@@ -271,11 +278,12 @@ li {
   display: grid;
   grid-template-columns: 1fr 1fr;
   width: 70%;
-  margin: 0 auto;
-  top: 20vh;
-  width: 40vw;
-  left: 30vw;
+  top: 10vh;
   height: 50vh;
+ }
+
+ .title-left{
+   margin: 0 auto;
  }
 
  .title-left p{
@@ -287,16 +295,17 @@ li {
  }
  .title-right{
    align-self: flex-end;
-   margin-right: -6rem;
+   margin: 0 auto;
+   margin-bottom: -3rem;
  }
  .title-right .text-scroll p {
-  font-size: 1.2rem;
+  font-size: 0.9rem;
  }
  .text-scroll{
    
  }
  .title-right p {
-  font-size: 1.3rem;
+  font-size: 1rem;
   color: #ccc;
   text-align: initial;
   font-weight: 700;
@@ -306,23 +315,21 @@ li {
  .chart-first-page svg {
   transition: inherit;
   position: fixed;
-  margin-top: -24vh;
-  margin-left: -22vw;
+  margin-left: -14vw;
+  margin-top: -15vh;
  }
  .icon-barchart {
    transform: scale(0.3) rotate(90deg);
  }
 
 .mouse-scroll{
-  /* display: none; */
   margin: 0 auto;
-  margin-top: -1rem;
   position: relative;
   width: 25px;
   height: 38px;
   box-shadow: inset 0 0 0 2px #fff;
   border-radius: 25px;
-  left:-4rem;
+  left: -5rem;
   top: -1rem;
 }
 .mouse-scroll::before{
@@ -425,7 +432,18 @@ div.tooltip {
   display: inline-block;
   margin-right: 5px;
 }
-
+.icon-barchart {
+  transform: scale(0.5) rotate(90deg);
+}
+@media screen and (max-width: 1735px) {
+  .icon-barchart {
+    transform: scale(0.5) rotate(90deg);
+  }
+  .chart-first-page svg {
+    margin-left: -16vw;
+    /* margin-top: -5vh; */
+  }
+}
 @media screen and (max-width: 1415px) {
   /* dashboard */
   .container{
@@ -434,6 +452,31 @@ div.tooltip {
   /* header */
   #container-header .title{
     font-size: 1.2rem;
+  }
+  /* chart first page */
+  .title-left p {
+    max-width: 200px;
+    font-size: 2rem;
+  }
+  .chart-first-page {
+    top: 20vh;
+  }
+  .chart-first-page svg {
+    margin-left: -13vw;
+    margin-top: -9vh;
+  }
+
+  .cases
+  #cases-btns{
+    margin-top: -4rem;
+    width: 80%;
+  }
+  .cases
+  #cases-btns .btn{
+    width: 15%;
+  }
+  .svg-container #cases-btns{
+    width: 80% !important;
   }
 }
 @media screen and (max-width: 1245px) {
@@ -444,6 +487,19 @@ div.tooltip {
   /* header */
   #container-header {
     grid-template-columns: 4fr 2.5fr;
+  }
+  /* chart first page */
+  .chart-first-page svg {
+    margin-left: -14vw;
+    margin-top: -7vh;
+  }
+  .cases
+  #cases-btns{
+    margin-top: -4rem;
+    width: 80%;
+  }
+  .title-right{
+    margin-top: -6rem;
   }
 }
 @media screen and (max-width: 995px) {
@@ -465,6 +521,24 @@ div.tooltip {
   #bar-group{
     font-size: 0.7rem;
   }
+  /* chart first page */
+  .title-left p {
+    max-width: 150px;
+    font-size: 1.6rem;
+  }
+  .cases
+  #cases-btns .btn{
+    width: 20%;
+  }
+  .cases
+  #cases-btns{
+    margin-top: -4rem;
+    width: 90%;
+    font-size: 0.6rem;
+  }
+  .svg-container #cases-btns{
+    width: 90% !important;
+  }
 }
 @media screen and (max-width: 765px) {
   /* dashboard */
@@ -484,7 +558,25 @@ div.tooltip {
   /* header */
   /* map */
   #timestamp-watch-container{
-    font-size: 1.2rem;
+    font-size:
+     1.2rem;
+  }
+  .svg-container #cases-btns{
+    width: unset !important;
+  }
+  /* chart first page */
+  .chart-first-page svg {
+    margin-left: -18vw;
+    margin-top: -9vh;
+  }
+  .title-right .text-scroll p {
+    font-size: 0.7rem;
+  }
+  .title-right p {
+    font-size: 0.9rem;
+  }
+  .icon-barchart {
+    transform: scale(0.5) rotate(90deg);
   }
 }
 @media screen and (max-width: 650px) {
@@ -509,5 +601,44 @@ div.tooltip {
   .page-btns button{
     font-size: 0.65rem;
     padding: 0.5rem 1rem 0.5rem 1rem;
+  }
+  /* first chart */
+  .chart-first-page svg {
+    margin-left: -20vw;
+    margin-top: -5vh;
+  }
+  .mouse-scroll {
+    width: 21px;
+    height: 32px;
+    left: -5rem;
+    top: -1rem;
+  }
+  .mouse-scroll::before {
+    width: 4px;
+    height: 4px;
+    top: 6px;
+    left: 9px;
+  }
+  .title-right p {
+    font-size: 0.7rem;
+  }
+  /* first chart page */
+ .chart-first-page{
+  position: absolute;
+  display: grid;
+  grid-template-rows: 1fr;
+  }
+}
+@media screen and (max-width: 550px) {
+  /* chart first page */
+  .chart-first-page svg {
+    margin-left: -23vw;
+    margin-top: -4vh;
+  }
+}
+@media screen and (max-width: 510px) {
+  /* chart first page */
+  .mouse-scroll {
+    top: -2.5rem;
   }
 }

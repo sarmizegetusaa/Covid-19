@@ -226,8 +226,8 @@ const StackedAreaChart = () => {
   return (
     <React.Fragment>
     <div className="stacked-chart-container">
-      <p className="title-stacked-chart">Covid-19 Cases</p>
       <div data-aos="slide-up" className="svg-stacked-container" ref={wrapperRef}>
+      <p className="title-stacked-chart">Covid-19 Cases</p>
         <svg className="stacked-chart" ref={svgRef}></svg>
       </div>
     </div>

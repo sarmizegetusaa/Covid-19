@@ -36,7 +36,8 @@ class Timeline extends Component {
         {
           ! this.props.activeCumulative ?
           (
-          <div id='timestamp'>
+          <div id="timestamp-watch-container">
+            <div id="timestamp"></div>
             <div className="watch_outline">
             <div 
               className="minutes"
