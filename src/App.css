@@ -24,6 +24,12 @@ body, .leaflet-container {
 .hide-component{
   display: none;
 }
+.hide{
+  opacity: 0;
+}
+.show{
+  opacity: 1;
+}
 .show-component{
   display: block !important ;
 }
@@ -143,8 +149,17 @@ a {
   color: #fff;
   z-index: 999;
   font-size: 1.5rem;
+  width: 40px;
+  float: right;
+}
+#timestamp-watch-container{
+  color: #fff;
+  z-index: 999;
+  font-size: 1.5rem;
   position: relative;
   float: right;
+  display: grid;
+  grid-template-columns: 2fr 4fr;
 }
 
 /* dashboard */
@@ -176,12 +191,13 @@ a {
   font-size: 0.8rem;
   color: #fff;
   margin-right: 0.5rem;
-  width: 20%;
+  /* width: 20%; */
 }
 .cases-btns{
   bottom:0;
   border-top: 5px solid #ad4828;
   margin-top: -8px;
+  /* width: 70%; */
 }
 ul{
   border: #717171 1px solid;
@@ -221,7 +237,6 @@ li {
   width: 25px;
   border: 3px solid #424445;
   border-radius: 50%;
-  right: 25vw
 }
 
 .minutes {
@@ -246,6 +261,8 @@ li {
 .charts-container{
   display: grid;
   grid-template-rows: 1fr 1fr;
+  width: 70%;
+  margin: 0 auto;
 }
 
  /* first chart page */
@@ -253,18 +270,14 @@ li {
   position: absolute;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  width: 1000px;
+  width: 70%;
   margin: 0 auto;
   top: 20vh;
-  width: 45vw;
+  width: 40vw;
   left: 30vw;
   height: 50vh;
  }
- .icon-barchart{
-  enable-background:"new 0 0 512 512";
-  transition: "inherit";
-  transform: "rotate(90deg);transform: scale(0.3)"
- }
+
  .title-left p{
   font-size: 3.3rem;
   color: #ccc;
@@ -274,9 +287,13 @@ li {
  }
  .title-right{
    align-self: flex-end;
+   margin-right: -6rem;
  }
  .title-right .text-scroll p {
   font-size: 1.2rem;
+ }
+ .text-scroll{
+   
  }
  .title-right p {
   font-size: 1.3rem;
@@ -290,7 +307,7 @@ li {
   transition: inherit;
   position: fixed;
   margin-top: -24vh;
-  margin-left: -24vw;
+  margin-left: -22vw;
  }
  .icon-barchart {
    transform: scale(0.3) rotate(90deg);
@@ -342,7 +359,7 @@ li {
  }
  .chart {
   height: 630px;
-  width: 1000px;
+  width: 100%;
   background-color: #222;
 }
 .tick {
@@ -362,7 +379,7 @@ li {
   margin: 0 auto;
   font-size: 1.5rem;
   color: #ccc;
-  width: 1000px;
+  /* width: 1000px; */
   margin-bottom: 1rem;
   font-weight: 600;
   text-align: end;
@@ -373,7 +390,7 @@ li {
 }
 .svg-stacked-container {
   height: 75%;
-  width: 52%;
+  width: 90%;
   margin: 0 auto;
 }
 
@@ -407,4 +424,90 @@ div.tooltip {
   border-radius: 50%;
   display: inline-block;
   margin-right: 5px;
+}
+
+@media screen and (max-width: 1415px) {
+  /* dashboard */
+  .container{
+    grid-template-columns: 5fr 1.5fr;
+  }
+  /* header */
+  #container-header .title{
+    font-size: 1.2rem;
+  }
+}
+@media screen and (max-width: 1245px) {
+  /* dashboard */
+  .container{
+    grid-template-columns: 5fr 2fr;
+  }
+  /* header */
+  #container-header {
+    grid-template-columns: 4fr 2.5fr;
+  }
+}
+@media screen and (max-width: 995px) {
+  /* dashboard */
+  .container{
+    grid-template-columns: 5fr 3fr;
+  }
+  #number-cases{
+    font-size: 1.8rem;
+  }
+  /* header */
+  .page-btns button{
+    font-size: 0.85rem;
+  }
+  #container-header {
+    grid-template-columns: 4fr 2fr;
+  }
+  /* barchart */
+  #bar-group{
+    font-size: 0.7rem;
+  }
+}
+@media screen and (max-width: 765px) {
+  /* dashboard */
+  .container{
+    grid-template-columns: 5fr 4fr;
+  }
+  #number-cases{
+    font-size: 1.6rem;
+  }
+  ul{
+    font-size: 0.8rem;
+  }
+  .page-btns button{
+    font-size: 0.75rem;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+  }
+  /* header */
+  /* map */
+  #timestamp-watch-container{
+    font-size: 1.2rem;
+  }
+}
+@media screen and (max-width: 650px) {
+  /* dashboard */
+  .container{
+    display: flex;
+    flex-direction: column;
+  }
+  #number-cases{
+    font-size: 1.6rem;
+  }
+  ul{
+    font-size: 0.8rem;
+  }
+  /* header */
+  #container-header .title{
+    font-size: 0.7rem;
+  }
+  #container-header {
+    grid-template-columns: 5fr 2fr;
+  }
+  .page-btns button{
+    font-size: 0.65rem;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+  }
 }
