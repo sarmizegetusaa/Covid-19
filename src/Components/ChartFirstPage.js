@@ -1,11 +1,7 @@
 import React from 'react';
-import { useSelector } from "react-redux";
 
 const ChartFirstPage = (props) => {
-  let displayFirstPage = useSelector(state => state.displayFirstPage);
-
   return (
-    // <div className={(displayFirstPage == 'show') ? (displayFirstPage) : props.props}>
     <div className={props.props}>
        <div className='chart-first-page'>
          

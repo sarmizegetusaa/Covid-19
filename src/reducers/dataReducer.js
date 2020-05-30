@@ -124,7 +124,6 @@ const dataReducer = (state = initState, action )=>{
   }
   if(action.type === 'SET_FIRSTPAGE'){
     let newState = { ...state };
-    console.log(action)
     newState.displayFirstPage = action.displayFirstPage;
     return newState;
   }

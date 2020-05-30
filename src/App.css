@@ -28,7 +28,7 @@ body, .leaflet-container {
   opacity: 0;
 }
 .show{
-  opacity: 1;
+  opacity: 1 !important;
 }
 .show-component{
   display: block !important ;
@@ -270,6 +270,7 @@ li {
   display: grid;
   width: 70%;
   margin: 0 auto;
+  grid-template-rows: 1fr 1fr;
 }
 
  /* first chart page */
@@ -296,7 +297,7 @@ li {
  .title-right{
    align-self: flex-end;
    margin: 0 auto;
-   margin-bottom: -3rem;
+   margin-bottom: -6rem;
  }
  .title-right .text-scroll p {
   font-size: 0.9rem;
@@ -392,7 +393,7 @@ li {
   text-align: end;
 }
 .stacked-chart-container{
-  height: 600px;
+  height: 85%;
   margin-top: 5rem;
 }
 .svg-stacked-container {
@@ -478,6 +479,10 @@ div.tooltip {
   .svg-container #cases-btns{
     width: 80% !important;
   }
+  .title-right{
+
+    margin-bottom: -3rem;
+  }
 }
 @media screen and (max-width: 1245px) {
   /* dashboard */
@@ -500,6 +505,12 @@ div.tooltip {
   }
   .title-right{
     margin-top: -6rem;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .chart-first-page svg {
+    margin-left: -17vw;
+    margin-top: -7vh;
   }
 }
 @media screen and (max-width: 995px) {
@@ -539,8 +550,12 @@ div.tooltip {
   .svg-container #cases-btns{
     width: 90% !important;
   }
+  .chart-first-page svg {
+    margin-left: -14vw;
+    margin-top: -7vh;
+  }
 }
-@media screen and (max-width: 765px) {
+@media screen and (max-width: 768px) {
   /* dashboard */
   .container{
     grid-template-columns: 5fr 4fr;
@@ -566,8 +581,8 @@ div.tooltip {
   }
   /* chart first page */
   .chart-first-page svg {
-    margin-left: -18vw;
-    margin-top: -9vh;
+    margin-left: -17vw;
+    margin-top: -7vh;
   }
   .title-right .text-scroll p {
     font-size: 0.7rem;
@@ -628,6 +643,7 @@ div.tooltip {
   display: grid;
   grid-template-rows: 1fr;
   }
+  
 }
 @media screen and (max-width: 550px) {
   /* chart first page */
@@ -635,10 +651,24 @@ div.tooltip {
     margin-left: -23vw;
     margin-top: -4vh;
   }
+  
+  .map-container:nth-child(1) { order: 2; }
+  .dashboard:nth-child(2) { order: 1; }
 }
 @media screen and (max-width: 510px) {
   /* chart first page */
   .mouse-scroll {
     top: -2.5rem;
+  }
+  .page-btns button {
+    font-size: 0.5rem;
+  }
+}
+
+@media screen and (max-width: 510px) {
+  /* chart first page */
+  .chart-first-page svg {
+    margin-left: -31vw;
+    margin-top: -4vh;
   }
 }

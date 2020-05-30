@@ -58,8 +58,9 @@ class Dashboard extends Component {
       return b[casesC] - a[casesC];
     });
 
+    
     let totalTimelineCases = this.totalDashboad(casesC);
-
+  
       return (
       <div className='dashboard'>
         <div 
@@ -72,8 +73,8 @@ class Dashboard extends Component {
             className={casesC}
           >
             { this.props.activeCumulative ? 
-              d3.format(',')(this.props.globalValues[casesC]) :
-              d3.format(',')(totalTimelineCases)
+              (this.props.globalValues[casesC] !== isNaN && this.props.globalValues[casesC] !== undefined ) ? (d3.format(',')(this.props.globalValues[casesC])) : null :
+               (totalTimelineCases !== undefined && totalTimelineCases === parseInt(totalTimelineCases, 10)) ?  d3.format(',')(totalTimelineCases) : null
             }
           </div>
         </div>
@@ -85,7 +86,9 @@ class Dashboard extends Component {
           })) : (
             this.props.dashboardTimeline ?
             (this.props.dashboardTimeline[`${casesC}`].map((location, idx)=>{
-            return (<li key={idx}><span className={casesC}>{ d3.format(',')(location[this.props.nowCase])}</span> {location[1]}</li>)
+            return (<li key={idx}><span className={casesC}>{ 
+              (location[this.props.nowCase] >= 0 && location[this.props.nowCase] !== undefined) ?  d3.format(',')(location[this.props.nowCase]) : null}
+              </span> {location[1]}</li>)
             })) : null
           )}
         </ul>

@@ -10,6 +10,7 @@ const Barchart = () => {
 
   let dashboardTimeline = useSelector(state => state.dashboardTimeline);
   let displayFirstPage = useSelector(state => state.displayFirstPage);
+  // let isBarChart = useSelector(state => state.isBarChart);
   let date = useSelector(state => state.date);
   let dataArr = [];
 
@@ -17,20 +18,18 @@ const Barchart = () => {
   const wrapperRef = useRef();
   const dimensions = useResizeObserver(wrapperRef);
   
-  const [ cases, setState ] = useState('');
+  const [ cases ] = useState('');
   const [ hide, hideChartFirstPage ] = useState('');
-  const [ show, showBarChartTitle ] = useState('');
-  const { innerHeight, innerWidth } = useWindowDimensions();
+  const {  innerWidth } = useWindowDimensions();
 
   let chartStarted = false;
-  let currentCases = '';
 
   useEffect(() => {
     dimensions || wrapperRef.current.getBoundingClientRect();
     if(dashboardTimeline.length === 0){
       return;
     }
-    if(cases === '' || displayFirstPage == 'show') {
+    if(cases === '' || displayFirstPage === 'show') {
       chartStarted = false;
       return;
     } else {
@@ -64,7 +63,7 @@ const Barchart = () => {
     
 
     hideChartFirstPage('hide-component');
-    showBarChartTitle('show-component');
+    // showBarChart('show');
     dashboardTimeline[`${cases}`].forEach((array, index)=>{
       date.forEach((dat, idx) => {
         let obj = {
@@ -120,7 +119,7 @@ const Barchart = () => {
     const svg = d3.select(svgRef.current);        
     const margin = ({top: 16, right: 6, bottom: 6, left: 0});
     let barSize;
-    let height = margin.top + barSize * n + margin.bottom;
+    // let height = margin.top + barSize * n + margin.bottom;
     let width;
     if(innerWidth < 650){
       width = 320;
@@ -263,8 +262,6 @@ const Barchart = () => {
             g.selectAll(".tick:not(:first-of-type) line").attr("stroke", "#222");
             g.selectAll(".tick:first-of-type text").remove()
             g.select(".domain").remove();
-            // transition.end().then(() => { })
-            //   .catch((err)=>console.log(err))
           };
     }        
     
@@ -285,10 +282,9 @@ const Barchart = () => {
       
       return ([date], transition) => {
         transition.end().then(() => { now.text(formatDate(date))})
-        // .catch((err)=>console.log(err))
         
         let dt = new Date();
-        if(formatDate(date) == formatDate(dt.setDate(dt.getDate() - 2))){
+        if(formatDate(date) === formatDate(dt.setDate(dt.getDate() -2))){
           d3.select('#cases-btns').style('opacity', '1')
         }
       };
@@ -316,8 +312,6 @@ const Barchart = () => {
         updateBars(keyframe, transition);
         updateLabels(keyframe, transition);
         updateTicker(keyframe, transition);
-      
-        // invalidation.then(() => svg.interrupt());
         
         await transition.end();
       }
@@ -334,12 +328,12 @@ const Barchart = () => {
     <React.Fragment>
       <div className="chart-container">
         <div className="svg-container" ref={wrapperRef}>
-          {/* <p className={"barchart-title " + show}>{capitalizeFirstLetter(cases)} cases</p> */}
-          {/* <svg className={ (displayFirstPage == "show") ? "hide" : "chart"} ref={svgRef} ></svg> */}
+          {/* <svg className={ (isBarChart) ? "chart hide" : 'chart show'} ref={svgRef} ></svg> */}
           <svg className="chart" ref={svgRef} ></svg>
           <ChartFirstPage props={hide}/>
           <div 
             id="cases-btns" 
+            // className={(!isBarChart) ? "cases-btns" : "cases-btn show"}
             className="cases-btns"
             style={{borderTop: "none",
                     width: "70%",

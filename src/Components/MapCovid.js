@@ -29,7 +29,7 @@ class MapCovid extends Component{
   }
   render() {
     return (
-      <div>
+      <div className='map-container'>
         <Map className='map' center={[0, 0]} zoom={3}>
           <TileLayer
             url='https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png'

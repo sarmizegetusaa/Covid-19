@@ -10,7 +10,7 @@ class Timeline extends Component {
     let intervalId = setInterval(this.timer, 150);
     this.props.addIntervalId(intervalId);
   }
-
+  
   componentWillUnmount(){
     clearInterval(this.props.intervalId)
   }
@@ -20,13 +20,13 @@ class Timeline extends Component {
     if(this.props.timelineCases.length === 0){
       return
     }
-    if(this.props.activeTimeline == true){
-      setTimeout(()=>{
+    if(this.props.activeTimeline === true){
+      // setTimeout(()=>{
         timelineCasesLength = this.props.timelineCases.confirmed[0].length;
         if(this.props.nowCase < timelineCasesLength -1){
           this.props.addNowCase(this.props.nowCase +1)
         }
-      }, 500)
+      // }, 500)
     }
   }
   render() {
