@@ -654,6 +654,10 @@ div.tooltip {
   
   .map-container:nth-child(1) { order: 2; }
   .dashboard:nth-child(2) { order: 1; }
+
+  .dashboard{
+    margin-top: 1rem;
+  }
 }
 @media screen and (max-width: 510px) {
   /* chart first page */
@@ -671,4 +675,17 @@ div.tooltip {
     margin-left: -31vw;
     margin-top: -4vh;
   }
+}
+@media screen and (max-width: 410px) {
+  .page-btns button {
+    font-size: .4rem;
+  }
+  #container-header .title {
+    font-size: 0.6rem;
+  }
+}
+@media screen and (max-width: 367px) {
+  .page-btns button {
+    font-size: .34rem;
+}
 }
