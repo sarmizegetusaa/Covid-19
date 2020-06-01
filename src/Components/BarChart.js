@@ -121,7 +121,10 @@ const Barchart = () => {
     let barSize;
     // let height = margin.top + barSize * n + margin.bottom;
     let width;
-    if(innerWidth < 650){
+    if(innerWidth < 410){
+      width = 270;
+      barSize = 24;
+    } else if(innerWidth < 650){
       width = 320;
       barSize = 30;
     } else if(innerWidth < 750){

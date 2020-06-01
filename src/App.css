@@ -593,6 +593,9 @@ div.tooltip {
   .icon-barchart {
     transform: scale(0.5) rotate(90deg);
   }
+  #label-group{
+    font-size: 0.9rem;
+  }
 }
 @media screen and (max-width: 650px) {
   /* dashboard */
@@ -682,6 +685,15 @@ div.tooltip {
   }
   #container-header .title {
     font-size: 0.6rem;
+  }
+  .svg-container #cases-btns {
+    margin-top: -13rem !important;
+  }
+  #label-group{
+    font-size: 0.7rem;
+  }
+  .chart{
+    margin-top: 2rem;
   }
 }
 @media screen and (max-width: 367px) {
