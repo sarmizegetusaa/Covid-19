@@ -379,6 +379,13 @@ li {
   height: 100vh;
   margin-top: 2rem;
 }
+.chart-timeline{
+  width: 100%;
+  position: absolute;
+  z-index: 9999;
+  bottom: -80px;
+  left: 20px;
+}
 
 /* stacked area chart */
 .title-stacked-chart{

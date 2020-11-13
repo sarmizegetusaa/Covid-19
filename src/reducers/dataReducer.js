@@ -15,7 +15,8 @@ const initState = {
   timelineCasesLoaded: false,
   timelineLength: 0,
   timestamp:[],
-  timelineState: 'play'
+  timelineState: 'play',
+  lastDate: [],
 }
 
 const dataReducer = (state = initState, action )=>{
@@ -131,6 +132,11 @@ const dataReducer = (state = initState, action )=>{
   if(action.type === 'SET_TIMELINESTATE'){
     let newState = { ...state };
     newState.timelineState = action.stateTimeline;
+    return newState;
+  }
+  if(action.type === 'SET_LASTDATE'){
+    let newState = { ...state };
+    newState.lastDate = action.lastDate;
     return newState;
   }
   return state;

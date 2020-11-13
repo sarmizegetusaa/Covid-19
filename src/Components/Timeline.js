@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import TimelineAxis from './TimelineAxis';
 import L from 'leaflet';
 import * as d3 from 'd3';
 import { Marker, Popup } from 'react-leaflet';
@@ -11,6 +12,16 @@ class Timeline extends Component {
     this.props.addIntervalId(intervalId);
   }
   componentDidUpdate(){
+    const timestamp = this.props.timestamp;
+    const lastDateEntry = timestamp[timestamp.length-1];
+    let day, month, year;
+    if(lastDateEntry !== undefined){
+      month = lastDateEntry.slice(0,2);
+      day = lastDateEntry.slice(3,5);
+      year = lastDateEntry.slice(6,8);
+      const lastDate = `20${year}-${month}-${day}T00:00:00`;
+      this.props.setLastDate(lastDate)
+    }
   }
   
   componentWillUnmount(){
@@ -24,6 +35,7 @@ class Timeline extends Component {
     }
     if(this.props.activeTimeline === true){
       timelineCasesLength = this.props.timelineCases.confirmed[0].length;
+      // console.log(timelineCasesLength)
       if(this.props.nowCase < timelineCasesLength -1 && this.props.timelineState === 'play'){
         this.props.addNowCase(this.props.nowCase +1)
       }
@@ -105,6 +117,7 @@ class Timeline extends Component {
         <div id="timeline-container">
           <button id="play-stop-btn" onClick={this.setTimelineState}>Stop</button>
         </div>
+          <TimelineAxis/>
         {/* timeline bar */}
       </div>
     )
@@ -132,7 +145,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     addNowCase: (nowCase) => { dispatch({type: 'ADD_NOWCASE', nowCase: nowCase})},
     addIntervalId: (intervalId) => { dispatch({type: 'ADD_INTERVALID', intervalId: intervalId})},
-    setTimelineStateReducer: (stateTimeline) => { dispatch({type: 'SET_TIMELINESTATE', stateTimeline: stateTimeline})}
+    setTimelineStateReducer: (stateTimeline) => { dispatch({type: 'SET_TIMELINESTATE', stateTimeline: stateTimeline})},
+    setLastDate: (lastDate) => { dispatch({type: 'SET_LASTDATE', lastDate: lastDate})}
   }
 }
 
