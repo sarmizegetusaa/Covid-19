@@ -43,7 +43,6 @@ body, .leaflet-container {
   font-family: Arial, Helvetica, sans-serif;
 }
 #header {
-
   align-items: center;
 }
 #container-header .title{
@@ -95,12 +94,10 @@ a {
   font-weight: 800;
 }
 .deaths {
-  /* color:  #712424; */
   color:  #942828;
   font-weight: 800;
 }
 .recovered {
-  /* color: #244624; */
   color: #008211;
   font-weight: 800;
 }
@@ -191,13 +188,11 @@ a {
   font-size: 0.8rem;
   color: #fff;
   margin-right: 0.5rem;
-  /* width: 20%; */
 }
 .cases-btns{
   bottom:0;
   border-top: 5px solid #ad4828;
   margin-top: -8px;
-  /* width: 70%; */
 }
 .cases
 .cases-btns .btn{
@@ -258,7 +253,12 @@ li {
   width: 1px;
   transform-origin: 50% 95%;
 }
-
+/* timeline container */
+#timeline-container{
+  position: absolute;
+  bottom: 100px;
+  z-index: 999;
+}
 @keyframes spinTheClock {
   100% {
     transform: rotate(360deg);
@@ -302,9 +302,7 @@ li {
  .title-right .text-scroll p {
   font-size: 0.9rem;
  }
- .text-scroll{
-   
- }
+
  .title-right p {
   font-size: 1rem;
   color: #ccc;
@@ -387,7 +385,6 @@ li {
   margin: 0 auto;
   font-size: 1.5rem;
   color: #ccc;
-  /* width: 1000px; */
   margin-bottom: 1rem;
   font-weight: 600;
   text-align: end;
@@ -699,5 +696,5 @@ div.tooltip {
 @media screen and (max-width: 367px) {
   .page-btns button {
     font-size: .34rem;
-}
+  }
 }

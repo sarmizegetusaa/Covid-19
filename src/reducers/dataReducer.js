@@ -15,6 +15,7 @@ const initState = {
   timelineCasesLoaded: false,
   timelineLength: 0,
   timestamp:[],
+  timelineState: 'play'
 }
 
 const dataReducer = (state = initState, action )=>{
@@ -125,6 +126,11 @@ const dataReducer = (state = initState, action )=>{
   if(action.type === 'SET_FIRSTPAGE'){
     let newState = { ...state };
     newState.displayFirstPage = action.displayFirstPage;
+    return newState;
+  }
+  if(action.type === 'SET_TIMELINESTATE'){
+    let newState = { ...state };
+    newState.timelineState = action.stateTimeline;
     return newState;
   }
   return state;

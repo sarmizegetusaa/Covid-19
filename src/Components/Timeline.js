@@ -10,6 +10,8 @@ class Timeline extends Component {
     let intervalId = setInterval(this.timer, 150);
     this.props.addIntervalId(intervalId);
   }
+  componentDidUpdate(){
+  }
   
   componentWillUnmount(){
     clearInterval(this.props.intervalId)
@@ -21,12 +23,20 @@ class Timeline extends Component {
       return
     }
     if(this.props.activeTimeline === true){
-      // setTimeout(()=>{
-        timelineCasesLength = this.props.timelineCases.confirmed[0].length;
-        if(this.props.nowCase < timelineCasesLength -1){
-          this.props.addNowCase(this.props.nowCase +1)
-        }
-      // }, 500)
+      timelineCasesLength = this.props.timelineCases.confirmed[0].length;
+      if(this.props.nowCase < timelineCasesLength -1 && this.props.timelineState === 'play'){
+        this.props.addNowCase(this.props.nowCase +1)
+      }
+    }
+  }
+  setTimelineState = () =>{
+    let stateTimeline;
+    if(this.props.timelineState === 'play'){
+      stateTimeline = 'stop';
+      this.props.setTimelineStateReducer(stateTimeline);
+    } else {
+      stateTimeline = 'play';
+      this.props.setTimelineStateReducer(stateTimeline);
     }
   }
   render() {
@@ -38,13 +48,13 @@ class Timeline extends Component {
           (
           <div id="timestamp-watch-container">
             <div id="timestamp"></div>
-            <div className="watch_outline">
+            {/* <div className="watch_outline">
             <div 
               className="minutes"
               style={{animation: (this.props.nowCase +1 === this.props.timelineLength) ? "none" : "spinTheClock 1s infinite linear" }}
             >
             </div>
-          </div> 
+          </div>  */}
           { this.props.timestamp[this.props.nowCase-4] }
         </div>) :
         null
@@ -92,6 +102,10 @@ class Timeline extends Component {
           )
           })) : null
         } 
+        <div id="timeline-container">
+          <button id="play-stop-btn" onClick={this.setTimelineState}>Stop</button>
+        </div>
+        {/* timeline bar */}
       </div>
     )
   }
@@ -109,7 +123,8 @@ const mapStateToProps = (state) => {
     minRadius: state.minRadius,
     maxRadius: state.maxRadius,
     timestamp: state.timestamp,
-    timelineLength: state.timelineLength
+    timelineLength: state.timelineLength,
+    timelineState: state.timelineState
   }
 }
 
@@ -117,6 +132,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     addNowCase: (nowCase) => { dispatch({type: 'ADD_NOWCASE', nowCase: nowCase})},
     addIntervalId: (intervalId) => { dispatch({type: 'ADD_INTERVALID', intervalId: intervalId})},
+    setTimelineStateReducer: (stateTimeline) => { dispatch({type: 'SET_TIMELINESTATE', stateTimeline: stateTimeline})}
   }
 }
 
