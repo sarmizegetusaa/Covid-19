@@ -37,6 +37,12 @@ class MapCovid extends Component{
             // contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
             continuousWorld= 'false'
             noWrap='true'
+
+            // maxZoom: 3,
+            // zoomOffset: 3,
+            // continuousWorld:false,
+            // bounds: [[-90, -180], [90, 180]],
+            // noWrap:true,
             />
           <CumulativeCases />
           <Timeline />

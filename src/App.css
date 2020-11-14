@@ -255,9 +255,12 @@ li {
 }
 /* timeline container */
 #timeline-container{
+  width: 100%;
   position: absolute;
   bottom: 100px;
   z-index: 999;
+  display: grid;
+  grid-template-columns: 25fr 1fr;
 }
 @keyframes spinTheClock {
   100% {
@@ -366,7 +369,7 @@ li {
  .chart {
   height: 630px;
   width: 100%;
-  background-color: #222;
+  background-color: #262626;
 }
 .tick {
   color: #fff;
@@ -380,11 +383,10 @@ li {
   margin-top: 2rem;
 }
 .chart-timeline{
-  width: 100%;
+  width: 95%;
   position: absolute;
   z-index: 9999;
-  bottom: -80px;
-  left: 20px;
+  left: 10px;
 }
 
 /* stacked area chart */

@@ -60,13 +60,6 @@ class Timeline extends Component {
           (
           <div id="timestamp-watch-container">
             <div id="timestamp"></div>
-            {/* <div className="watch_outline">
-            <div 
-              className="minutes"
-              style={{animation: (this.props.nowCase +1 === this.props.timelineLength) ? "none" : "spinTheClock 1s infinite linear" }}
-            >
-            </div>
-          </div>  */}
           { this.props.timestamp[this.props.nowCase-4] }
         </div>) :
         null
@@ -115,9 +108,9 @@ class Timeline extends Component {
           })) : null
         } 
         <div id="timeline-container">
+          <TimelineAxis/>
           <button id="play-stop-btn" onClick={this.setTimelineState}>Stop</button>
         </div>
-          <TimelineAxis/>
         {/* timeline bar */}
       </div>
     )
