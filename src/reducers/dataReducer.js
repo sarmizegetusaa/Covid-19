@@ -84,6 +84,12 @@ const dataReducer = (state = initState, action )=>{
     newState.nowCase = action.nowCase;
     return newState;
   }
+  if(action.type === 'CHANGE_NOWCASE'){
+    let newState = { ...state };
+    console.log('action',action)
+    newState.nowCase = action.nowCase;
+    return newState;
+  }
   if(action.type === 'ADD_INTERVALID'){
     let newState = { ...state };
     newState.intervalId = action.intervalId;

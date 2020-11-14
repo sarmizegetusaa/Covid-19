@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as d3 from "d3";
 
@@ -16,6 +16,7 @@ const TimelineAxis = () => {
   
   useEffect(()=>{
     const { width, height } = wrapperRef.current.getBoundingClientRect();
+    const widthXAxis = svgRef.current.getBoundingClientRect().width;
     const svg = d3.select(svgRef.current);
 
     let x = d3.scaleTime()
@@ -32,40 +33,75 @@ const TimelineAxis = () => {
     }
 
     const xAxis = svg.append("g")
-      // .attr("transform", `translate(0, ${height})`)
+      .attr("transform", `translate(0, 15)`)
+      .attr("class", "axis axis--x")
       .call(d3.axisBottom(x));
       
-      // add label for x axis
-      xAxis.append("text")
-      .attr("class", "label")
-      .attr("fill", "#545454")
-      .attr("y", 30)
-      .attr("x", width/2);
-  
-      const timelineCursor = svg.append('rect')
-      .attr('height', 40)
-      .attr("class", "rect-cursor")
-      .attr("transform", "translate(" + 0 + "," + 30 + ")")
-      .attr('width', 2)
-      .attr('stroke', '#ccc')
-      .attr('fill', '#85b7d1');
-      
-      const xScale = d3.scaleTime()
-      .domain([timeline.minX, timeline.maxX])
-      .range([20, timeline.width])
+    // add label for x axis
+    xAxis.append("text")
+    .attr("class", "label")
+    .attr("fill", "#545454")
 
-      const spanX = (d) => {
-        return xScale(timeline.parser(d))
-      };
-      if(timelineState === 'play' && nowCase <= timestamp.length-1){
-          timelineCursor
-          .attr('x', spanX(timestamp[nowCase]));
-      } else {
+    const timelineCursor = svg.append('rect')
+    .attr('height', 40)
+    .attr("class", "rect-cursor")
+    .attr("transform", "translate(" + -10 + "," + -10 + ")")
+    .attr('width', 2)
+    .attr('stroke', '#ccc')
+    .attr('fill', '#85b7d1');
+    
+    const xScale = d3.scaleTime()
+    .domain([timeline.minX, timeline.maxX])
+    .range([20, timeline.width]);
+
+    let invX = d3.scaleTime()
+    .domain([20, timeline.width])
+    .range([timeline.minX, timeline.maxX]);
+
+    const spanX = (d) => {
+      return xScale(timeline.parser(d))
+    };
+    if(timelineState === 'play' && nowCase <= timestamp.length-1){
         timelineCursor
-          .attr('x', spanX(timestamp[nowCase]));
-      }
+        .attr('x', spanX(timestamp[nowCase-3]));
+    } else {
+      timelineCursor
+        .attr('x', spanX(timestamp[nowCase-3]));
+    }
 
-  }, [lastDate, timelineState, timestamp, nowCase])
+    // on click timeline find date
+    function findDateIndex(_date) {
+      let foundIndex = -1;
+      const _dateUnix = _date.getTime();
+      timestamp.forEach((dateEl, dateIndex)=>{
+        if(dateIndex === 0) return;
+        dateEl = new Date(dateEl);
+        if(dateEl.getTime() > _dateUnix &&
+          foundIndex === -1
+        ){
+          foundIndex = dateIndex - 1;
+        }
+      });
+      if (foundIndex === -1) foundIndex = 0;
+      return foundIndex;
+    }
+    // change time 
+    const changeTime =()=>{
+      let computedX = d3.event.clientX;
+      console.log(computedX)
+      if(computedX >= 41){
+
+        timelineCursor
+          .attr('x', spanX(invX(computedX)));
+        
+        const seekIndex = findDateIndex(invX(computedX));
+        dispatch({type:"CHANGE_NOWCASE", nowCase: seekIndex});
+        
+      }
+    }
+    d3.select(".chart-timeline").on('click', changeTime);
+
+  }, [lastDate, timelineState, timestamp, nowCase, dispatch])
   return (
     <div className="svg-container-timeline" ref={wrapperRef}>
       <svg className="chart-timeline" ref={svgRef}>SVG</svg>

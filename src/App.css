@@ -5,10 +5,12 @@
 body, .leaflet-container {
   background: #262626;
 }
-
+.leaflet-top, .leaflet-left{
+  display: none;
+}
 .container{
   display: grid;
-  grid-template-columns: 4fr 1fr;
+  grid-template-columns: 5fr 1fr;
   grid-gap: 0.7rem;
 }
 .map{
@@ -257,11 +259,21 @@ li {
 #timeline-container{
   width: 100%;
   position: absolute;
-  bottom: 100px;
+  bottom: 0px;
   z-index: 999;
   display: grid;
   grid-template-columns: 25fr 1fr;
+  height: 80px;
 }
+.rect-cursor{
+  z-index: 9999;
+  position: absolute;
+}
+.svg-container-timeline{
+  background: #333;
+  opacity: 0.6;
+}
+
 @keyframes spinTheClock {
   100% {
     transform: rotate(360deg);
@@ -386,9 +398,16 @@ li {
   width: 95%;
   position: absolute;
   z-index: 9999;
-  left: 10px;
+  left: 20px;
+  bottom: 20px;
+  height: 40px;
 }
-
+.chart-timeline:hover{
+  cursor: pointer;
+}
+.axis--x {
+  color: #5e5b5b;
+}
 /* stacked area chart */
 .title-stacked-chart{
   margin: 0 auto;
