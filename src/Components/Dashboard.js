@@ -22,22 +22,22 @@ class Dashboard extends Component {
   handleChangeConfirm = () =>{
     const cases = 'confirmed';
     this.props.onChangeButton(cases);
-    this.props.addNowCase(3);
+    this.props.addNowCase(4);
   }
   handleChangeActive = () =>{
     const cases = 'active';
     this.props.onChangeButton(cases);
-    this.props.addNowCase(3);
+    this.props.addNowCase(4);
   }
   handleChangeRecovered = () =>{
     const cases = 'recovered';
     this.props.onChangeButton(cases);
-    this.props.addNowCase(3);
+    this.props.addNowCase(4);
   }
   handleChangeDeaths = () =>{
     const cases = 'deaths';
     this.props.onChangeButton(cases);
-    this.props.addNowCase(3);
+    this.props.addNowCase(4);
   }
   totalDashboad = (casesC) => {
     if(this.props.dashboardTimeline.length === 0){
@@ -82,10 +82,10 @@ class Dashboard extends Component {
         <ul style={{border: this.state.border[`${casesC}`]}}>
           { this.props.activeCumulative ?(
             confirmedLocations.map((location, idx)=>{
-            return (<li key={idx}><span className={casesC}>{d3.format(',')(location[casesC])}</span> {location.countryRegion}</li>)
-          })) : (
-            this.props.dashboardTimeline ?
-            (this.props.dashboardTimeline[`${casesC}`].map((location, idx)=>{
+              return (<li key={idx}><span className={casesC}>{d3.format(',')(location[casesC])}</span> {location.countryRegion}</li>)
+            })) : (
+              this.props.dashboardTimeline ?
+              (this.props.dashboardTimeline[`${casesC}`].map((location, idx)=>{
             return (<li key={idx}><span className={casesC}>{ 
               (location[this.props.nowCase] >= 0 && location[this.props.nowCase] !== undefined) ?  d3.format(',')(location[this.props.nowCase]) : null}
               </span> {location[1]}</li>)

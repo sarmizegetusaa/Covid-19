@@ -13,6 +13,7 @@ class Timeline extends Component {
   }
   componentDidUpdate(){
     const timestamp = this.props.timestamp;
+    // date for the x axis
     const lastDateEntry = timestamp[timestamp.length-1];
     let day, month, year;
     if(lastDateEntry !== undefined){
@@ -35,7 +36,6 @@ class Timeline extends Component {
     }
     if(this.props.activeTimeline === true){
       timelineCasesLength = this.props.timelineCases.confirmed[0].length;
-      // console.log(timelineCasesLength)
       if(this.props.nowCase < timelineCasesLength -1 && this.props.timelineState === 'play'){
         this.props.addNowCase(this.props.nowCase +1)
       }
@@ -49,10 +49,12 @@ class Timeline extends Component {
     } else {
       stateTimeline = 'play';
       this.props.setTimelineStateReducer(stateTimeline);
+      console.log(stateTimeline)
     }
   }
   render() {
     let cases = this.props.cases;
+
     return (
       <div>
         {
@@ -106,12 +108,15 @@ class Timeline extends Component {
               </Marker>
           )
           })) : null
-        } 
+        }
+        {!this.props.activeCumulative ? (
         <div id="timeline-container">
           <TimelineAxis/>
-          <button id="play-stop-btn" onClick={this.setTimelineState}>Stop</button>
+          <button id="play-stop-btn" onClick={this.setTimelineState}>
+            <img className='play-stop-timeline-btn' src={this.props.timelineState === 'play' ? '/img/pause.svg' : '/img/play-btn.svg'} alt="btn-play-stop"></img>
+          </button>
         </div>
-        {/* timeline bar */}
+        ): null}
       </div>
     )
   }

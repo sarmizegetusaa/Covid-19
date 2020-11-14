@@ -35,6 +35,7 @@ const TimelineAxis = () => {
     const xAxis = svg.append("g")
       .attr("transform", `translate(0, 15)`)
       .attr("class", "axis axis--x")
+      .attr("stroke-width", "2")
       .call(d3.axisBottom(x));
       
     // add label for x axis
@@ -47,8 +48,8 @@ const TimelineAxis = () => {
     .attr("class", "rect-cursor")
     .attr("transform", "translate(" + -10 + "," + -10 + ")")
     .attr('width', 2)
-    .attr('stroke', '#ccc')
-    .attr('fill', '#85b7d1');
+    .attr('stroke', '#b7b5b5')
+    .attr('fill', '#b7b5b5');
     
     const xScale = d3.scaleTime()
     .domain([timeline.minX, timeline.maxX])
@@ -63,10 +64,10 @@ const TimelineAxis = () => {
     };
     if(timelineState === 'play' && nowCase <= timestamp.length-1){
         timelineCursor
-        .attr('x', spanX(timestamp[nowCase-3]));
-    } else {
+        .attr('x', spanX(timestamp[nowCase-4]));
+    } else if(timelineState === 'stop'){
       timelineCursor
-        .attr('x', spanX(timestamp[nowCase-3]));
+        .attr('x', spanX(timestamp[nowCase-4]));
     }
 
     // on click timeline find date
@@ -88,15 +89,12 @@ const TimelineAxis = () => {
     // change time 
     const changeTime =()=>{
       let computedX = d3.event.clientX;
-      console.log(computedX)
       if(computedX >= 41){
-
         timelineCursor
           .attr('x', spanX(invX(computedX)));
-        
+
         const seekIndex = findDateIndex(invX(computedX));
         dispatch({type:"CHANGE_NOWCASE", nowCase: seekIndex});
-        
       }
     }
     d3.select(".chart-timeline").on('click', changeTime);

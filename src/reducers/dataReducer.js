@@ -9,7 +9,7 @@ const initState = {
   hasErrors: false,
   keyframes: [],
   locations: [],
-  nowCase: 3,
+  nowCase: 4,
   numberOfCases: 0,
   timelineCases: [],
   timelineCasesLoaded: false,
@@ -86,7 +86,6 @@ const dataReducer = (state = initState, action )=>{
   }
   if(action.type === 'CHANGE_NOWCASE'){
     let newState = { ...state };
-    console.log('action',action)
     newState.nowCase = action.nowCase;
     return newState;
   }

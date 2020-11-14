@@ -15,7 +15,6 @@ body, .leaflet-container {
 }
 .map{
   height: 93vh;
-  border: #717171 1px solid;
 }
 .true{
   display: block;
@@ -154,10 +153,11 @@ a {
 #timestamp-watch-container{
   color: #fff;
   z-index: 999;
-  font-size: 1.5rem;
-  position: relative;
-  float: right;
+  font-size: 1.3rem;
+  position: absolute;
   display: grid;
+  right: 0;
+  bottom: 90px;
   grid-template-columns: 2fr 4fr;
 }
 
@@ -272,6 +272,14 @@ li {
 .svg-container-timeline{
   background: #333;
   opacity: 0.6;
+}
+.play-stop-timeline-btn{
+  width: 33px;
+  height: 33px;
+}
+#play-stop-btn{
+  background: rgb(45, 45, 45);
+  border: 0px;
 }
 
 @keyframes spinTheClock {
