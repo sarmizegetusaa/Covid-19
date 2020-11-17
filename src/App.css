@@ -5,7 +5,7 @@
 body, .leaflet-container {
   background: #262626;
 }
-.leaflet-top, .leaflet-left{
+.leaflet-top, .leaflet-left, .leaflet-bottom,  .leaflet-right{
   display: none;
 }
 .container{
@@ -403,10 +403,10 @@ li {
   margin-top: 2rem;
 }
 .chart-timeline{
-  width: 95%;
+  width: 97%;
   position: absolute;
   z-index: 9999;
-  left: 20px;
+  left: 0px;
   bottom: 20px;
   height: 40px;
 }

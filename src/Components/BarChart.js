@@ -60,7 +60,6 @@ const Barchart = () => {
       d3.select('#label-group').remove();
       d3.selectAll('#ticker-group').remove();
     }
-    
 
     hideChartFirstPage('hide-component');
     // showBarChart('show');

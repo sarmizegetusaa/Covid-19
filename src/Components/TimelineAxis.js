@@ -29,7 +29,7 @@ const TimelineAxis = () => {
       parser: d3.isoParse,
       minX: d3.isoParse(new Date('2020-01-22T00:00:00')),
       maxX: d3.isoParse(new Date(lastDate)),
-      width: width - 10,
+      width: width,
     }
 
     const xAxis = svg.append("g")
@@ -53,10 +53,10 @@ const TimelineAxis = () => {
     
     const xScale = d3.scaleTime()
     .domain([timeline.minX, timeline.maxX])
-    .range([20, timeline.width]);
+    .range([0, timeline.width]);
 
     let invX = d3.scaleTime()
-    .domain([20, timeline.width])
+    .domain([0, timeline.width])
     .range([timeline.minX, timeline.maxX]);
 
     const spanX = (d) => {
@@ -64,16 +64,17 @@ const TimelineAxis = () => {
     };
     if(timelineState === 'play' && nowCase <= timestamp.length-1){
         timelineCursor
-        .attr('x', spanX(timestamp[nowCase-4]));
+        .attr('x', spanX(timestamp[nowCase]));
     } else if(timelineState === 'stop'){
       timelineCursor
-        .attr('x', spanX(timestamp[nowCase-4]));
+        .attr('x', spanX(timestamp[nowCase]));
     }
 
     // on click timeline find date
     function findDateIndex(_date) {
       let foundIndex = -1;
       const _dateUnix = _date.getTime();
+      console.log(_date)
       timestamp.forEach((dateEl, dateIndex)=>{
         if(dateIndex === 0) return;
         dateEl = new Date(dateEl);
@@ -89,13 +90,11 @@ const TimelineAxis = () => {
     // change time 
     const changeTime =()=>{
       let computedX = d3.event.clientX;
-      if(computedX >= 41){
-        timelineCursor
-          .attr('x', spanX(invX(computedX)));
+      timelineCursor
+        .attr('x', spanX(invX(computedX)));
 
-        const seekIndex = findDateIndex(invX(computedX));
-        dispatch({type:"CHANGE_NOWCASE", nowCase: seekIndex});
-      }
+      const seekIndex = findDateIndex(invX(computedX));
+      dispatch({type:"CHANGE_NOWCASE", nowCase: seekIndex});
     }
     d3.select(".chart-timeline").on('click', changeTime);
 

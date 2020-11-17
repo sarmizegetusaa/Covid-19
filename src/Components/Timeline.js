@@ -36,7 +36,7 @@ class Timeline extends Component {
     }
     if(this.props.activeTimeline === true){
       timelineCasesLength = this.props.timelineCases.confirmed[0].length;
-      if(this.props.nowCase < timelineCasesLength -1 && this.props.timelineState === 'play'){
+      if(this.props.nowCase < timelineCasesLength -1  && this.props.timelineState === 'play'){
         this.props.addNowCase(this.props.nowCase +1)
       }
     }
@@ -49,7 +49,6 @@ class Timeline extends Component {
     } else {
       stateTimeline = 'play';
       this.props.setTimelineStateReducer(stateTimeline);
-      console.log(stateTimeline)
     }
   }
   render() {
@@ -62,7 +61,7 @@ class Timeline extends Component {
           (
           <div id="timestamp-watch-container">
             <div id="timestamp"></div>
-          { this.props.timestamp[this.props.nowCase-4] }
+          { this.props.timestamp[this.props.nowCase] }
         </div>) :
         null
         }
