@@ -8,7 +8,7 @@ class Header extends Component{
     const active = {
       activeCumulative: false,
       activeTimeline: true,
-      nowCase: 3
+      nowCase: 0
     }
     this.props.toggleTimeline(active);
   };

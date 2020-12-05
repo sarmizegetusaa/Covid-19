@@ -62,13 +62,13 @@ const TimelineAxis = () => {
     const spanX = (d) => {
       return xScale(timeline.parser(d))
     };
-    if(timelineState === 'play' && nowCase <= timestamp.length-1){
+    if(timelineState === 'play'){
         timelineCursor
-        .attr('x', spanX(timestamp[nowCase]));
+        .attr('x', spanX(timestamp[nowCase -1]));
     } else if(timelineState === 'stop'){
       timelineCursor
-        .attr('x', spanX(timestamp[nowCase]));
-    }
+        .attr('x', spanX(timestamp[nowCase -1]));
+    } 
 
     // on click timeline find date
     function findDateIndex(_date) {
@@ -86,6 +86,7 @@ const TimelineAxis = () => {
       if (foundIndex === -1) foundIndex = 0;
       return foundIndex;
     }
+
     // change time 
     const changeTime =()=>{
       let computedX = d3.event.clientX;

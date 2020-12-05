@@ -58,7 +58,6 @@ class Dashboard extends Component {
       return b[casesC] - a[casesC];
     });
 
-    
     let totalTimelineCases = this.totalDashboad(casesC);
   
       return (
@@ -87,7 +86,7 @@ class Dashboard extends Component {
               this.props.dashboardTimeline ?
               (this.props.dashboardTimeline[`${casesC}`].map((location, idx)=>{
             return (<li key={idx}><span className={casesC}>{ 
-              (location[this.props.nowCase] >= 0 && location[this.props.nowCase] !== undefined) ?  d3.format(',')(location[this.props.nowCase]) : null}
+              (location[this.props.nowCase] >= 0 && location[this.props.nowCase] !== undefined) ?  d3.format(',')(location[this.props.nowCase +3]) : null}
               </span> {location[1]}</li>)
             })) : null
           )}

@@ -66,7 +66,7 @@ class Data extends Component {
           })
           dashboardTimeline[`${type}`].push(...uniqueNames[`${type}`])
 
-          let timelineLength = dashboardTimeline[`${type}`][0].length;
+          let timelineLength = dashboardTimeline[`${type}`][0].length -4;
           this.props.setTimelineLength(timelineLength)
           setTimeout(()=>{
             dashboardTimeline[`${type}`].sort(function(a, b){
@@ -109,7 +109,6 @@ class Data extends Component {
               state.recovered += element.recovered;
               state.deaths += element.deaths;
               state.active += element.active;
-              // console.log(state)
             }
           });
           
