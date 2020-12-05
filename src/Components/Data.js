@@ -58,7 +58,6 @@ class Data extends Component {
             if(state === undefined){
               dashboardTimeline[`${type}`].push([...element])
             } else {
-              // console.log(element.length)
               for(let i=4; i<element.length; i++){
                 state[i] = parseInt(state[i]) + 0;
                 state[i] += parseInt(element[i])

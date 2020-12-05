@@ -24,7 +24,7 @@ class Timeline extends Component {
   timer = () => {
     let timelineCasesLength;
     if(this.props.timelineCases.length === 0){
-      return
+      return;
     }
     if(this.props.activeTimeline === true){
       timelineCasesLength = this.props.timelineCases.confirmed[0].length;
@@ -45,7 +45,7 @@ class Timeline extends Component {
   }
   render() {
     let cases = this.props.cases;
-
+    let timelineLength = this.props.timelineLength;
     return (
       <div>
         {
@@ -53,7 +53,8 @@ class Timeline extends Component {
           (
           <div id="timestamp-watch-container">
             <div id="timestamp"></div>
-          { this.props.timestamp[this.props.nowCase] }
+          { this.props.nowCase < (this.props.timelineCases.confirmed[0].length -1) ?
+          this.props.timestamp[this.props.nowCase] :  this.props.timestamp[timelineLength - 5]}
         </div>) :
         null
         }
@@ -135,7 +136,8 @@ const mapDispatchToProps = (dispatch) => {
     addNowCase: (nowCase) => { dispatch({type: 'ADD_NOWCASE', nowCase: nowCase})},
     addIntervalId: (intervalId) => { dispatch({type: 'ADD_INTERVALID', intervalId: intervalId})},
     setTimelineStateReducer: (stateTimeline) => { dispatch({type: 'SET_TIMELINESTATE', stateTimeline: stateTimeline})},
-    setLastDate: (lastDate) => { dispatch({type: 'SET_LASTDATE', lastDate: lastDate})}
+    setLastDate: (lastDate) => { dispatch({type: 'SET_LASTDATE', lastDate: lastDate})},
+    // setTimelineLenght: (timelineLength) => { dispatch({type: 'SET_TIMELINELENGHT', timelineLength:timelineLength})}
   }
 }
 

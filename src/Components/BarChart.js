@@ -10,7 +10,6 @@ const Barchart = () => {
 
   let dashboardTimeline = useSelector(state => state.dashboardTimeline);
   let displayFirstPage = useSelector(state => state.displayFirstPage);
-  // let isBarChart = useSelector(state => state.isBarChart);
   let date = useSelector(state => state.date);
   let dataArr = [];
 
@@ -49,7 +48,6 @@ const Barchart = () => {
     chartStarted = false;
     d3.select('#cases-btns').style('opacity', '0');
     await wait(200);
-    // d3.select('#cases-btns').style('opacity', '1');
 
     let axisExists = d3.select('#axis-group');
 
@@ -62,7 +60,6 @@ const Barchart = () => {
     }
 
     hideChartFirstPage('hide-component');
-    // showBarChart('show');
     dashboardTimeline[`${cases}`].forEach((array, index)=>{
       date.forEach((dat, idx) => {
         let obj = {
@@ -118,7 +115,6 @@ const Barchart = () => {
     const svg = d3.select(svgRef.current);        
     const margin = ({top: 16, right: 6, bottom: 6, left: 0});
     let barSize;
-    // let height = margin.top + barSize * n + margin.bottom;
     let width;
     if(innerWidth < 410){
       width = 270;
@@ -322,46 +318,35 @@ const Barchart = () => {
     startC().then(() => {}).catch(err => console.log('wtf?', err));
   }
 
-  // function capitalizeFirstLetter(string) {
-  //   return string.charAt(0).toUpperCase() + string.slice(1);
-  // }
-  
   return (
     <React.Fragment>
       <div className="chart-container">
         <div className="svg-container" ref={wrapperRef}>
-          {/* <svg className={ (isBarChart) ? "chart hide" : 'chart show'} ref={svgRef} ></svg> */}
           <svg className="chart" ref={svgRef} ></svg>
           <ChartFirstPage props={hide}/>
           <div 
             id="cases-btns" 
-            // className={(!isBarChart) ? "cases-btns" : "cases-btn show"}
             className="cases-btns"
             style={{borderTop: "none",
                     width: "70%",
                     margin: "0 auto",
                     textAlign: "end"
                   }}
-            // data-aos="fade-left"
             data-aos-offset="200"
             data-aos-delay="500"
             data-aos-duration="2000"
           >
             <button 
-              // style={{ width: "10%" }} 
               className="confirmed-btn btn"
               onClick={() => startChart('confirmed') }
-              // onClick={() => setState('confirmed')}
               >Confirmed
             </button>
             <button 
-              // style={{ width: "10%" }}
               className="recovered-btn btn" 
               onClick={() => startChart('recovered')}>Recovered
             </button>
             <button 
               className="deaths-btn btn"
-              // style={{ width: "10%" }}
               onClick={() => startChart('deaths')}>Deaths
             </button>
           </div>

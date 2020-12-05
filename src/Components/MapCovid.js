@@ -27,15 +27,14 @@ class MapCovid extends Component{
     this.props.setMinRadius(minRadius);
     this.props.setMaxRadius(maxRadius);
   }
+
   render() {
     return (
       <div className='map-container'>
-        <Map className='map' center={[20, 0]} zoom={2} minZoom={2} maxZoom={4}>
+        <Map className='map' bounds={[[-90, -180], [90, 180]]} center={[20, 0]} zoom={2} minZoom={2} maxZoom={4}>
           <TileLayer
             url='https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
-            // attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> 
-            // contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-            continuousWorld= 'false'
+            continuousWorld='false'
             noWrap='true'
             />
           <CumulativeCases />
