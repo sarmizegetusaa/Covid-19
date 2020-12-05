@@ -13,16 +13,8 @@ class Timeline extends Component {
   }
   componentDidUpdate(){
     const timestamp = this.props.timestamp;
-    // date for the x axis
     const lastDateEntry = timestamp[timestamp.length-1];
-    let day, month, year;
-    if(lastDateEntry !== undefined){
-      month = lastDateEntry.slice(0,2);
-      day = lastDateEntry.slice(3,5);
-      year = lastDateEntry.slice(6,8);
-      const lastDate = `20${year}-${month}-${day}T00:00:00`;
-      this.props.setLastDate(lastDate)
-    }
+    this.props.setLastDate(lastDateEntry)
   }
   
   componentWillUnmount(){

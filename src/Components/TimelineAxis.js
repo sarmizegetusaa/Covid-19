@@ -74,7 +74,6 @@ const TimelineAxis = () => {
     function findDateIndex(_date) {
       let foundIndex = -1;
       const _dateUnix = _date.getTime();
-      console.log(_date)
       timestamp.forEach((dateEl, dateIndex)=>{
         if(dateIndex === 0) return;
         dateEl = new Date(dateEl);
@@ -91,8 +90,8 @@ const TimelineAxis = () => {
     const changeTime =()=>{
       let computedX = d3.event.clientX;
       timelineCursor
-        .attr('x', spanX(invX(computedX)));
-
+      .attr('x', spanX(invX(computedX)));
+      
       const seekIndex = findDateIndex(invX(computedX));
       dispatch({type:"CHANGE_NOWCASE", nowCase: seekIndex});
     }
